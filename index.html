@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaotic Daily Oracle - Daily Tarot Card Generator</title>
+    <meta name="description" content="Get your daily chaotic oracle card pull for feelings, spirals, and main character energy. Funny, witchy, empowering tarot readings.">
+    <meta name="keywords" content="tarot, oracle, daily card, chaotic divine feminine, witchy readings, tarot generator">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Analytics: Insert your GA tracking code here -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_TRACKING_ID');
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <h1 class="nav-title">Chaotic Daily Oracle</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Chaotic Daily Oracle</h1>
+            <p>A daily card pull for your feelings, your spiral, and your main character era.</p>
+            <button id="pull-card-btn" class="cta-button">Pull My Card</button>
+        </section>
+
+        <section class="card-of-day">
+            <h2>Card of the Day</h2>
+            <div class="daily-card-banner">
+                <div class="daily-card-content">
+                    <h3 id="daily-topic"></h3>
+                    <p id="daily-word"></p>
+                    <p id="daily-message"></p>
+                </div>
+                <div class="countdown">
+                    <p>Next card in <span id="countdown-timer"></span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad placeholder above card result -->
+        <div class="ad-placeholder">
+            <!-- Google AdSense: Insert AdSense code here for banner ad above card -->
+            <p>Ad Placeholder - Above Card</p>
+        </div>
+
+        <section id="card-result" class="card-result hidden">
+            <div class="card-container">
+                <div class="card" id="card">
+                    <div class="card-front">
+                        <p>Click to reveal your card</p>
+                    </div>
+                    <div class="card-back hidden">
+                        <h2 id="card-title"></h2>
+                        <p id="card-message"></p>
+                        <h3>Today’s Vibe</h3>
+                        <p id="card-vibe"></p>
+                        <h3>Avoid This</h3>
+                        <p id="card-avoid"></p>
+                        <h3>Do This Instead</h3>
+                        <p id="card-do"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-actions">
+                <button id="pull-again-btn" class="action-button">Pull Again</button>
+                <p id="share-text">Share this: "My chaotic oracle card today is [Card Title]. Check yours at ChaoticDailyOracle.com!"</p>
+            </div>
+        </section>
+
+        <!-- Ad placeholder below card result -->
+        <div class="ad-placeholder">
+            <!-- Google AdSense: Insert AdSense code here for banner ad below card -->
+            <p>Ad Placeholder - Below Card</p>
+        </div>
+
+        <section class="engagement">
+            <h2>Explore More Readings</h2>
+            <div class="engagement-buttons">
+                <button class="engagement-button">Try a Love Reading</button>
+                <button class="engagement-button">Yes or No Reading</button>
+                <a href="blog.html" class="engagement-link">Read More Tarot Meanings</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Sticky footer ad placeholder -->
+        <div class="footer-ad">
+            <!-- Google AdSense: Insert AdSense code here for sticky footer ad -->
+            <p>Ad Placeholder - Sticky Footer</p>
+        </div>
+        <p>&copy; 2023 Chaotic Daily Oracle. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
