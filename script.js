@@ -388,8 +388,25 @@ const oracleCards = [
     }
 ];
 
+const zodiacMessages = {
+    Aries: "As an Aries, this card ignites your fiery passion and drives you forward with unstoppable energy.",
+    Taurus: "As a Taurus, this card grounds you in stability and reminds you to savor the simple pleasures.",
+    Gemini: "As a Gemini, this card sparks your curiosity and encourages versatile communication.",
+    Cancer: "As a Cancer, this card nurtures your emotional depths and strengthens your intuitive bonds.",
+    Leo: "As a Leo, this card amplifies your confidence and shines a light on your creative expression.",
+    Virgo: "As a Virgo, this card refines your attention to detail and promotes practical healing.",
+    Libra: "As a Libra, this card balances your harmony and guides you towards fair resolutions.",
+    Scorpio: "As a Scorpio, this card delves into your transformative power and reveals hidden truths.",
+    Sagittarius: "As a Sagittarius, this card expands your horizons and fuels your adventurous spirit.",
+    Capricorn: "As a Capricorn, this card builds your ambition and rewards your disciplined efforts.",
+    Aquarius: "As an Aquarius, this card innovates your vision and connects you to collective energies.",
+    Pisces: "As a Pisces, this card flows with your empathy and enhances your spiritual intuition."
+};
+
 let currentCard = null;
+let selectedSign = null;
 const historyKey = 'chaoticRecentReadings';
+const signKey = 'selectedZodiacSign';
 
 document.getElementById('pull-card-btn').addEventListener('click', pullCard);
 document.getElementById('pull-again-btn').addEventListener('click', pullCard);
@@ -447,8 +464,13 @@ function pullCard() {
     const randomIndex = Math.floor(Math.random() * oracleCards.length);
     currentCard = oracleCards[randomIndex];
 
+    let message = currentCard.message;
+    if (selectedSign && zodiacMessages[selectedSign]) {
+        message += ` ${zodiacMessages[selectedSign]}`;
+    }
+
     document.getElementById('card-title').textContent = currentCard.title;
-    document.getElementById('card-message').textContent = currentCard.message;
+    document.getElementById('card-message').textContent = message;
     document.getElementById('card-vibe').textContent = currentCard.vibe;
     document.getElementById('card-avoid').textContent = currentCard.avoid;
     document.getElementById('card-do').textContent = currentCard.doInstead;
@@ -592,3 +614,28 @@ function renderRecentReadings() {
         historyList.appendChild(entry);
     });
 }
+
+// Zodiac functionality
+function loadSelectedSign() {
+    selectedSign = window.localStorage.getItem(signKey);
+    if (selectedSign) {
+        const btn = document.querySelector(`.zodiac-btn[data-sign="${selectedSign}"]`);
+        if (btn) btn.classList.add('selected');
+    }
+}
+
+function selectZodiacSign(sign) {
+    selectedSign = sign;
+    window.localStorage.setItem(signKey, sign);
+    document.querySelectorAll('.zodiac-btn').forEach(btn => btn.classList.remove('selected'));
+    document.querySelector(`.zodiac-btn[data-sign="${sign}"]`).classList.add('selected');
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    loadSelectedSign();
+    document.querySelectorAll('.zodiac-btn').forEach(btn => {
+        btn.addEventListener('click', () => selectZodiacSign(btn.dataset.sign));
+    });
+    renderRecentReadings();
+});
