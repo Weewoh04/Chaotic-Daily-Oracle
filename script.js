@@ -469,6 +469,7 @@ function pullCard() {
         message += ` ${zodiacMessages[selectedSign]}`;
     }
 
+    currentCard.word = currentCard.title;
     document.getElementById('card-title').textContent = currentCard.title;
     document.getElementById('card-message').textContent = message;
     document.getElementById('card-vibe').textContent = currentCard.vibe;
@@ -482,6 +483,7 @@ function pullCard() {
     document.querySelector('.card-back').classList.add('hidden');
     document.querySelector('.card-front').classList.remove('hidden');
     hideShareActions();
+    hideViralPanel();
 }
 
 function flipCard() {
@@ -494,9 +496,12 @@ function flipCard() {
         document.querySelector('.card-back').classList.toggle('hidden');
         if (willFlipToBack) {
             showShareActions();
+            populateViralPanel();
+            showViralPanel();
             saveRecentReading();
         } else {
             hideShareActions();
+            hideViralPanel();
         }
     }, 300);
 }
@@ -521,6 +526,42 @@ function copyReading() {
     if (!currentCard) return;
     const readingText = `${currentCard.vibe}: ${currentCard.message}`;
     copyTextToClipboard(readingText);
+}
+
+function populateViralPanel() {
+    if (!currentCard) return;
+    const topicLabel = selectedSign || 'oracle';
+    const topic = (selectedSign || 'oracle').toLowerCase().replace(/[^a-z0-9]+/g, '');
+    const caption = `POV: the oracle pulled "${currentCard.word}" for my ${topicLabel} situation 🔮✨\n\nMessage: "${currentCard.message.slice(0,80)}..."\n\nPull yours FREE 👇\n#oraclecards #${topic}era #dailyoracle #spiritualtiktok #mamimayhem #chaoticdailyoracle`;
+    document.getElementById('tiktokCaption').textContent = caption;
+}
+
+function showViralPanel() {
+    document.getElementById('viralPanel').style.display = 'block';
+}
+
+function hideViralPanel() {
+    document.getElementById('viralPanel').style.display = 'none';
+}
+
+function copyTikTok() {
+    if (!currentCard) return;
+    copyTextToClipboard(document.getElementById('tiktokCaption').textContent);
+    showToast('TikTok caption copied!');
+}
+
+function copyPinterest() {
+    if (!currentCard) return;
+    const topic = (selectedSign || 'oracle').toLowerCase().replace(/[^a-z0-9]+/g, '');
+    const pinterestText = `✨ ${currentCard.word} for my ${selectedSign || 'oracle'} energy. Pull yours free at chaotic-daily-oracle.vercel.app #oraclecards #${topic}era #spiritualtiktok #chaoticdailyoracle`;
+    copyTextToClipboard(pinterestText);
+    showToast('Pinterest text copied!');
+}
+
+function shareX() {
+    if (!currentCard) return;
+    const text = `My oracle card today: "${currentCard.word}" ✦ Pull yours free at chaotic-daily-oracle.vercel.app`;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
 }
 
 function copyTextToClipboard(text) {

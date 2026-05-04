@@ -351,7 +351,16 @@
             <!-- Google AdSense: Insert Google AdSense code here for sticky footer ad -->
             <p>Ad Placeholder - Sticky Footer</p>
         </div>
-        <p>&copy; 2023 Chaotic Daily Oracle. All rights reserved.</p>
+        <div style="margin-bottom:1rem;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;font-size:.78rem;">
+          <a href="index.html" style="color:rgba(232,223,200,0.5)">Home</a>
+          <a href="blog.html" style="color:rgba(232,223,200,0.5)">Blog</a>
+          <a href="#faq" style="color:rgba(232,223,200,0.5)">FAQ</a>
+          <a href="#pull" style="color:rgba(232,223,200,0.5)">Pull a Card</a>
+          <a href="https://mamimayhem.com" style="color:#C8973A">Mami Mayhem Shop ✦</a>
+          <a href="sitemap.xml" style="color:rgba(232,223,200,0.3)">Sitemap</a>
+        </div>
+        <p>&copy; <span id="yr"></span> Chaotic Daily Oracle · Part of the <a href="https://mamimayhem.com" style="color:#C8973A">Mami Mayhem</a> universe</p>
+        <script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
