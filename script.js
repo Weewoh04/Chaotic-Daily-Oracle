@@ -631,6 +631,20 @@ function selectZodiacSign(sign) {
     document.querySelector(`.zodiac-btn[data-sign="${sign}"]`).classList.add('selected');
 }
 
+function pullFriendCard() {
+    const name = document.getElementById('friend-name').value.trim();
+    if (!name) {
+        alert('Please enter a name');
+        return;
+    }
+    const randomIndex = Math.floor(Math.random() * oracleCards.length);
+    const card = oracleCards[randomIndex];
+    const text = `${name}'s reading: ${card.vibe} — ${card.message}`;
+    document.getElementById('friend-text').textContent = text;
+    document.getElementById('friend-reading').classList.remove('hidden');
+    document.getElementById('copy-friend-reading').textContent = `Copy & Send to ${name}`;
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     // Banner dismissal
@@ -642,6 +656,24 @@ document.addEventListener('DOMContentLoaded', () => {
     dismissBtn.addEventListener('click', () => {
         banner.style.display = 'none';
         sessionStorage.setItem('bannerDismissed', 'true');
+    });
+
+    // Friend card modal
+    document.getElementById('friend-card-btn').addEventListener('click', () => {
+        document.getElementById('friend-modal').classList.remove('hidden');
+    });
+
+    document.getElementById('close-modal').addEventListener('click', () => {
+        document.getElementById('friend-modal').classList.add('hidden');
+        document.getElementById('friend-reading').classList.add('hidden');
+        document.getElementById('friend-name').value = '';
+    });
+
+    document.getElementById('pull-friend-card').addEventListener('click', pullFriendCard);
+
+    document.getElementById('copy-friend-reading').addEventListener('click', () => {
+        const text = document.getElementById('friend-text').textContent;
+        copyTextToClipboard(text);
     });
 
     loadSelectedSign();

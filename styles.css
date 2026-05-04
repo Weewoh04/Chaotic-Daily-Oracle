@@ -747,6 +747,87 @@ footer {
     background: #ff69b4;
 }
 
+/* Modal styles */
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--nebula);
+    margin: 15% auto;
+    padding: 2rem;
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 0 30px var(--gold);
+}
+
+.close {
+    color: var(--gold);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close:hover {
+    color: var(--gold-light);
+}
+
+.modal-content h2 {
+    color: var(--moonlight);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    background: var(--deep);
+    color: var(--moonlight);
+    font-size: 1rem;
+}
+
+.modal-content input::placeholder {
+    color: var(--silver);
+}
+
+.modal-content button {
+    display: block;
+    margin: 0 auto 1rem;
+}
+
+#friend-reading {
+    text-align: center;
+}
+
+#friend-text {
+    color: var(--moonlight);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
 /* Blog styles */
 .blog-hero {
     max-width: 900px;
