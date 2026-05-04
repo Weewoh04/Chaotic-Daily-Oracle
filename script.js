@@ -680,5 +680,60 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.zodiac-btn').forEach(btn => {
         btn.addEventListener('click', () => selectZodiacSign(btn.dataset.sign));
     });
+    initHeroStarfield();
     renderRecentReadings();
 });
+
+function initHeroStarfield() {
+    const canvas = document.getElementById('stars');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const stars = [];
+    const starCount = 120;
+
+    function resizeCanvas() {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const ratio = window.devicePixelRatio || 1;
+        canvas.width = width * ratio;
+        canvas.height = height * ratio;
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+        stars.length = 0;
+        for (let i = 0; i < starCount; i += 1) {
+            stars.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 1.2 + 0.4,
+                alpha: Math.random() * 0.65 + 0.2,
+                drift: Math.random() * 0.2 - 0.1
+            });
+        }
+    }
+
+    function drawStars() {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        ctx.clearRect(0, 0, width, height);
+
+        stars.forEach(star => {
+            star.x += star.drift;
+            if (star.x < 0) star.x = width;
+            if (star.x > width) star.x = 0;
+
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+            ctx.fill();
+        });
+    }
+
+    function animate() {
+        drawStars();
+        requestAnimationFrame(animate);
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    animate();
+}

@@ -13,6 +13,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Chaotic Daily Oracle — Pull a Free Card for Your Situation">
     <meta name="twitter:description" content="Free oracle card readings for love, money, baby daddy drama, healing era, boss mode & more. Your chaotic spiritual bestie.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700;800&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -47,12 +50,17 @@
 
     <main id="home">
         <section class="hero">
+            <canvas id="stars"></canvas>
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
             <h1>Chaotic Daily Oracle</h1>
             <p>A daily card pull for your feelings, your spiral, and your main character era.</p>
             <button id="pull-card-btn" class="cta-button">Pull My Card</button>
         </section>
 
-        <section class="card-of-day">
+        <div class="section-divider"></div>
+
+        <section class="card-of-day oracle-stage">
             <h2>Card of the Day</h2>
             <div class="daily-card-banner">
                 <div class="daily-card-content">
@@ -65,6 +73,8 @@
                 </div>
             </div>
         </section>
+
+        <div class="section-divider"></div>
 
         <!-- Ad placeholder above card result -->
         <div class="ad-placeholder">
@@ -89,6 +99,8 @@
                 <button class="zodiac-btn" data-sign="Pisces">♓ Pisces</button>
             </div>
         </section>
+
+        <div class="section-divider"></div>
 
         <section id="card-result" class="card-result hidden">
             <div class="card-container">
@@ -121,6 +133,8 @@
             <div class="toast hidden" id="copy-toast">Copied!</div>
         </section>
 
+        <div class="section-divider"></div>
+
         <section class="section history-section" id="recent-readings">
             <p class="section-label">✦ Your Recent Readings ✦</p>
             <div class="history-panel">
@@ -133,6 +147,8 @@
                 </div>
             </div>
         </section>
+
+        <div class="section-divider"></div>
 
         <!-- Ad placeholder below card result -->
         <div class="ad-placeholder">
@@ -178,6 +194,8 @@
             </div>
         </section>
 
+        <div class="section-divider"></div>
+
         <section class="section feature-section" id="readings">
             <p class="section-label">✦ All readings ✦</p>
             <h2 class="section-title">Every kind of chaos, covered</h2>
@@ -222,6 +240,8 @@
             </div>
         </section>
 
+        <div class="section-divider"></div>
+
         <section class="section testimonials-section">
             <p class="section-label">✦ The people have spoken ✦</p>
             <h2 class="section-title">Girlies are obsessed</h2>
@@ -244,12 +264,16 @@
             </div>
         </section>
 
+        <div class="section-divider"></div>
+
         <section class="section seo-section" id="about">
             <h2>What is the Chaotic Daily Oracle?</h2>
             <p>The Chaotic Daily Oracle is a free daily oracle card reading platform designed for real women dealing with real life. Unlike traditional tarot or oracle apps that take themselves too seriously, we give you spiritual guidance that actually speaks your language — whether you're navigating a healing era, manifesting your money glow up, surviving co-parenting chaos, or just need a sign about that person you can't stop thinking about at 2am.</p>
             <p>Every reading is crafted with intention and humor, pulling from a deck of original oracle messages across life categories like love, money, drama, healing, boss mode, and glow-up energy.</p>
             <p>Chaotic Daily Oracle is your spiritual bestie with a sense of humor and a lot of emotional accuracy.</p>
         </section>
+
+        <div class="section-divider"></div>
 
         <section class="section faq-section" id="faq">
             <p class="section-label">✦ FAQ ✦</p>
@@ -272,6 +296,8 @@
             </div>
         </section>
 
+        <div class="section-divider"></div>
+
         <section class="cta-strip">
             <h2>Get your daily reading delivered</h2>
             <p>Subscribe for your free daily oracle drop. No spam, just good vibes and guidance.</p>
@@ -280,6 +306,15 @@
                 <button>Subscribe Free</button>
             </div>
         </section>
+
+        <div class="ticker-strip">
+            <div class="ticker-track">
+                <span>✨ Daily reading drops at midnight</span>
+                <span>🔮 Share your chaos with your squad</span>
+                <span>💫 Zodiac energy feels extra vivid</span>
+                <span>🌙 Pull your main character moment now</span>
+            </div>
+        </div>
     </main>
 
     <footer>

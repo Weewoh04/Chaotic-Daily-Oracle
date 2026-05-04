@@ -13,6 +13,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Oracle Blog - Chaotic Daily Oracle">
     <meta name="twitter:description" content="Read insightful oracle blog posts about healing, drama, money manifestation, boss mode, tarot vs oracle, and daily card rituals.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700;800&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <!-- Google Analytics: Insert your GA tracking code here -->
 </head>
@@ -36,6 +39,9 @@
 
     <main>
         <section class="section blog-hero">
+            <canvas id="stars"></canvas>
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
             <p class="section-label">✦ Blog</p>
             <h1 class="section-title">Oracle wisdom for your healing era, drama, money moves, and boss mode energy.</h1>
             <p class="section-sub">Six quick reads to help you understand your pull, manifest with purpose, and make the oracle work for your life.</p>
@@ -44,39 +50,39 @@
         <section class="section blog-grid">
             <article class="blog-card">
                 <span class="blog-tag">Healing Era</span>
-                <h2>5 Signs You're in Your Healing Era (And What the Oracle Says)</h2>
+                <h3>5 Signs You're in Your Healing Era (And What the Oracle Says)</h3>
                 <p class="blog-excerpt">Your intuition is louder, boundaries matter, and your energy is changing. Here’s how the oracle confirms you’re actually in healing mode.</p>
-                <div class="blog-meta"><span>4 min read</span><a href="#post1">Read More →</a></div>
+                <div class="blog-meta"><span>4 min read</span><a class="read-more" href="#post1">Read More →</a></div>
             </article>
             <article class="blog-card">
                 <span class="blog-tag">Drama</span>
-                <h2>Baby Daddy Drama? Here's What Your Oracle Card Means</h2>
+                <h3>Baby Daddy Drama? Here's What Your Oracle Card Means</h3>
                 <p class="blog-excerpt">Ex energy can be exhausting, but the oracle has wisdom for your next move. Learn the real meaning behind the card and what to do next.</p>
-                <div class="blog-meta"><span>5 min read</span><a href="#post2">Read More →</a></div>
+                <div class="blog-meta"><span>5 min read</span><a class="read-more" href="#post2">Read More →</a></div>
             </article>
             <article class="blog-card">
                 <span class="blog-tag">Money</span>
-                <h2>How to Use Oracle Cards for Money Manifestation in 2025</h2>
+                <h3>How to Use Oracle Cards for Money Manifestation in 2025</h3>
                 <p class="blog-excerpt">Money manifestation is more than positive thinking. Use oracle readings to tune your abundance mindset and take aligned action.</p>
-                <div class="blog-meta"><span>4 min read</span><a href="#post3">Read More →</a></div>
+                <div class="blog-meta"><span>4 min read</span><a class="read-more" href="#post3">Read More →</a></div>
             </article>
             <article class="blog-card">
                 <span class="blog-tag">Boss Mode</span>
-                <h2>What Does 'Boss Mode' Mean Spiritually?</h2>
+                <h3>What Does 'Boss Mode' Mean Spiritually?</h3>
                 <p class="blog-excerpt">Boss mode isn’t just hustle culture — it’s a spiritual frequency. Discover what the oracle reveals about stepping into your personal power.</p>
-                <div class="blog-meta"><span>4 min read</span><a href="#post4">Read More →</a></div>
+                <div class="blog-meta"><span>4 min read</span><a class="read-more" href="#post4">Read More →</a></div>
             </article>
             <article class="blog-card">
                 <span class="blog-tag">Love</span>
-                <h2>Love Reading vs Tarot: What's the Difference?</h2>
+                <h3>Love Reading vs Tarot: What's the Difference?</h3>
                 <p class="blog-excerpt">Oracle and tarot both give guidance, but they land differently. This quick guide helps you choose the right reading for your relationship energy.</p>
-                <div class="blog-meta"><span>3 min read</span><a href="#post5">Read More →</a></div>
+                <div class="blog-meta"><span>3 min read</span><a class="read-more" href="#post5">Read More →</a></div>
             </article>
             <article class="blog-card">
                 <span class="blog-tag">Daily Ritual</span>
-                <h2>How to Pull a Daily Oracle Card and Actually Use It</h2>
+                <h3>How to Pull a Daily Oracle Card and Actually Use It</h3>
                 <p class="blog-excerpt">A daily pull is only powerful if you follow through. Learn the ritual that turns a cute card into real energy work.</p>
-                <div class="blog-meta"><span>4 min read</span><a href="#post6">Read More →</a></div>
+                <div class="blog-meta"><span>4 min read</span><a class="read-more" href="#post6">Read More →</a></div>
             </article>
         </section>
 
@@ -258,6 +264,7 @@
             <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Article","headline":"Love Reading vs Tarot: What's the Difference?","datePublished":"2025-01-15","author":{"@type":"Organization","name":"Chaotic Daily Oracle"}}
             </script>
+    <script src="script.js"></script>
             <article id="post6" class="full-post">
                 <h2>How to Pull a Daily Oracle Card and Actually Use It</h2>
                 <div class="post-meta">
