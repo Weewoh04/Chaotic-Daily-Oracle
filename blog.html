@@ -10,6 +10,10 @@
     <!-- Google Analytics: Insert your GA tracking code here -->
 </head>
 <body>
+    <div id="promo-banner" class="promo-banner">
+        <a href="https://mamimayhem.shopify.com" target="_blank">✦ New drops at Mami Mayhem — Shop the collection →</a>
+        <button id="dismiss-banner" class="dismiss-btn">×</button>
+    </div>
     <header>
         <nav>
             <div class="nav-container">
@@ -110,5 +114,18 @@
         </div>
         <p>&copy; 2023 Chaotic Daily Oracle. All rights reserved.</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const banner = document.getElementById('promo-banner');
+            const dismissBtn = document.getElementById('dismiss-banner');
+            if (sessionStorage.getItem('bannerDismissed')) {
+                banner.style.display = 'none';
+            }
+            dismissBtn.addEventListener('click', () => {
+                banner.style.display = 'none';
+                sessionStorage.setItem('bannerDismissed', 'true');
+            });
+        });
+    </script>
 </body>
 </html>

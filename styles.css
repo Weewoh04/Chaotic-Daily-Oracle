@@ -28,6 +28,46 @@ body {
     min-height: 100vh;
 }
 
+.promo-banner {
+    background: var(--deep);
+    color: var(--gold);
+    padding: 0.5rem 1rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--gold);
+}
+
+.promo-banner a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.promo-banner a:hover {
+    color: var(--gold-light);
+}
+
+.dismiss-btn {
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 1rem;
+    transition: color 0.3s;
+}
+
+.dismiss-btn:hover {
+    color: var(--gold-light);
+}
+
 header {
     background: rgba(0, 0, 0, 0.8);
     padding: 1rem;

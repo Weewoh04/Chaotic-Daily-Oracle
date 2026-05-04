@@ -633,6 +633,17 @@ function selectZodiacSign(sign) {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    // Banner dismissal
+    const banner = document.getElementById('promo-banner');
+    const dismissBtn = document.getElementById('dismiss-banner');
+    if (sessionStorage.getItem('bannerDismissed')) {
+        banner.style.display = 'none';
+    }
+    dismissBtn.addEventListener('click', () => {
+        banner.style.display = 'none';
+        sessionStorage.setItem('bannerDismissed', 'true');
+    });
+
     loadSelectedSign();
     document.querySelectorAll('.zodiac-btn').forEach(btn => {
         btn.addEventListener('click', () => selectZodiacSign(btn.dataset.sign));
