@@ -389,6 +389,7 @@ const oracleCards = [
 ];
 
 let currentCard = null;
+const historyKey = 'chaoticRecentReadings';
 
 document.getElementById('pull-card-btn').addEventListener('click', pullCard);
 document.getElementById('pull-again-btn').addEventListener('click', pullCard);
@@ -396,9 +397,13 @@ document.getElementById('card').addEventListener('click', flipCard);
 document.getElementById('pinterest-share').addEventListener('click', shareOnPinterest);
 document.getElementById('copy-caption').addEventListener('click', copyTikTokCaption);
 document.getElementById('copy-reading').addEventListener('click', copyReading);
+document.getElementById('clear-history').addEventListener('click', clearHistory);
 
 // Initialize daily card on page load
-document.addEventListener('DOMContentLoaded', initDailyCard);
+document.addEventListener('DOMContentLoaded', () => {
+    initDailyCard();
+    renderRecentReadings();
+});
 
 function initDailyCard() {
     const dailyCard = getCardOfTheDay();
@@ -467,6 +472,7 @@ function flipCard() {
         document.querySelector('.card-back').classList.toggle('hidden');
         if (willFlipToBack) {
             showShareActions();
+            saveRecentReading();
         } else {
             hideShareActions();
         }
@@ -536,4 +542,53 @@ function showShareActions() {
 
 function hideShareActions() {
     document.getElementById('share-actions').classList.add('hidden');
+}
+
+function getRecentReadings() {
+    const stored = window.localStorage.getItem(historyKey);
+    return stored ? JSON.parse(stored) : [];
+}
+
+function saveRecentReading() {
+    if (!currentCard) return;
+    const readings = getRecentReadings();
+    const entry = {
+        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        topic: currentCard.title,
+        word: currentCard.vibe,
+        message: currentCard.message
+    };
+
+    readings.unshift(entry);
+    while (readings.length > 5) readings.pop();
+    window.localStorage.setItem(historyKey, JSON.stringify(readings));
+    renderRecentReadings();
+}
+
+function clearHistory() {
+    window.localStorage.removeItem(historyKey);
+    renderRecentReadings();
+}
+
+function renderRecentReadings() {
+    const historyList = document.getElementById('history-list');
+    const readings = getRecentReadings();
+    historyList.innerHTML = '';
+
+    if (!readings.length) {
+        historyList.innerHTML = '<p class="history-empty">No recent readings yet. Pull a card to save your first one.</p>';
+        return;
+    }
+
+    readings.forEach(reading => {
+        const entry = document.createElement('div');
+        entry.className = 'history-entry';
+        entry.innerHTML = `
+            <p class="history-date">${reading.date}</p>
+            <p class="history-topic">${reading.topic}</p>
+            <p><strong>Word:</strong> ${reading.word}</p>
+            <p>${reading.message}</p>
+        `;
+        historyList.appendChild(entry);
+    });
 }
