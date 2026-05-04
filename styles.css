@@ -1,6 +1,19 @@
 /* Chaotic Daily Oracle Styles */
 /* Mobile-first responsive design */
 
+:root {
+    --deep: #07040F;
+    --midnight: #0D0920;
+    --nebula: #130A2A;
+    --gold: #C8973A;
+    --gold-light: #F0D9A8;
+    --stardust: #9B7FD4;
+    --moonlight: #E8DFC8;
+    --rose: #C4516B;
+    --aurora: #2A7A8A;
+    --silver: #B8B0C8;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,8 +22,8 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #000000, #2a0a1e, #000000);
-    color: #f5f5dc; /* Cream */
+    background: var(--deep);
+    color: var(--moonlight);
     line-height: 1.6;
     min-height: 100vh;
 }
