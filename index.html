@@ -22,15 +22,17 @@
             <div class="nav-container">
                 <h1 class="nav-title">Chaotic Daily Oracle</h1>
                 <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#pull">Pull a Card</a></li>
+                    <li><a href="#readings">Readings</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <main>
+    <main id="home">
         <section class="hero">
             <h1>Chaotic Daily Oracle</h1>
             <p>A daily card pull for your feelings, your spiral, and your main character era.</p>
@@ -79,6 +81,12 @@
                 <button id="pull-again-btn" class="action-button">Pull Again</button>
                 <p id="share-text">Share this: "My chaotic oracle card today is [Card Title]. Check yours at ChaoticDailyOracle.com!"</p>
             </div>
+            <div class="share-actions hidden" id="share-actions">
+                <button class="share-button" id="pinterest-share">Share on Pinterest</button>
+                <button class="share-button" id="copy-caption">Copy TikTok Caption</button>
+                <button class="share-button" id="copy-reading">Copy Reading</button>
+            </div>
+            <div class="toast hidden" id="copy-toast">Copied!</div>
         </section>
 
         <!-- Ad placeholder below card result -->
@@ -87,12 +95,144 @@
             <p>Ad Placeholder - Below Card</p>
         </div>
 
-        <section class="engagement">
-            <h2>Explore More Readings</h2>
-            <div class="engagement-buttons">
-                <button class="engagement-button">Try a Love Reading</button>
-                <button class="engagement-button">Yes or No Reading</button>
-                <a href="blog.html" class="engagement-link">Read More Tarot Meanings</a>
+        <section class="section" id="pull">
+            <p class="section-label">✦ Choose your situation ✦</p>
+            <h2 class="section-title">What do you need clarity on?</h2>
+            <p class="section-sub">Tap a topic and then pull your card for real-talk guidance</p>
+            <div class="situation-grid">
+                <div class="sit-card love">
+                    <span class="sit-icon">💋</span>
+                    <p class="sit-name">Love Era</p>
+                    <p class="sit-desc">Romance, attraction, and relationship energy</p>
+                </div>
+                <div class="sit-card money">
+                    <span class="sit-icon">💰</span>
+                    <p class="sit-name">Money Moves</p>
+                    <p class="sit-desc">Abundance, hustle, and financial instincts</p>
+                </div>
+                <div class="sit-card drama">
+                    <span class="sit-icon">🍵</span>
+                    <p class="sit-name">Baby Daddy Drama</p>
+                    <p class="sit-desc">Co-parenting, ex energy, and messy texts</p>
+                </div>
+                <div class="sit-card healing">
+                    <span class="sit-icon">🌿</span>
+                    <p class="sit-name">Healing Era</p>
+                    <p class="sit-desc">Self-care, boundaries, and emotional rebirth</p>
+                </div>
+                <div class="sit-card boss">
+                    <span class="sit-icon">👑</span>
+                    <p class="sit-name">Boss Mode</p>
+                    <p class="sit-desc">Career, confidence, and your power moves</p>
+                </div>
+                <div class="sit-card clarity">
+                    <span class="sit-icon">🔮</span>
+                    <p class="sit-name">Clarity & Decisions</p>
+                    <p class="sit-desc">The choice you keep replaying in your head</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section feature-section" id="readings">
+            <p class="section-label">✦ All readings ✦</p>
+            <h2 class="section-title">Every kind of chaos, covered</h2>
+            <p class="section-sub">Oracle guidance for love, money, boss mode, healing, drama, and glow-up energy</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background:#F4D0D8;">💋</div>
+                    <h3>Love &amp; Relationship Oracle</h3>
+                    <p>Daily guidance for romance, situationships, heartbreak, and manifesting the energy you need.</p>
+                    <span class="feature-tag" style="background:#F4D0D8;color:#C4516B;">Love Era</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background:#F0D9A8;">💰</div>
+                    <h3>Money &amp; Abundance Oracle</h3>
+                    <p>Readings for financial flow, hustle energy, cash decisions, and money mindset shifts.</p>
+                    <span class="feature-tag" style="background:#F0D9A8;color:#B85C1A;">Money Moves</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background:#F0D5BA;">🍵</div>
+                    <h3>Baby Daddy Drama Oracle</h3>
+                    <p>Co-parenting chaos, ex energy, and emotional boundaries — the oracle gets real.</p>
+                    <span class="feature-tag" style="background:#F0D5BA;color:#B85C1A;">Drama</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background:#C8DDD4;">🌿</div>
+                    <h3>Healing Era Oracle</h3>
+                    <p>Readings for emotional recovery, self-work, and becoming the version of you you deserve.</p>
+                    <span class="feature-tag" style="background:#C8DDD4;color:#4A7C65;">Healing Era</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background:#DBC8E2;">👑</div>
+                    <h3>Boss Mode Career Oracle</h3>
+                    <p>Career moves, confidence, and the kind of energy that says “I’m ready” to the world.</p>
+                    <span class="feature-tag" style="background:#DBC8E2;color:#6B3D7A;">Boss Mode</span>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="background:#C8DFF0;">✨</div>
+                    <h3>Glow Up &amp; Confidence Oracle</h3>
+                    <p>Manifest your glow-up, build inner light, and own your main character era.</p>
+                    <span class="feature-tag" style="background:#C8DFF0;color:#2E6B99;">Glow Up</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section testimonials-section">
+            <p class="section-label">✦ The people have spoken ✦</p>
+            <h2 class="section-title">Girlies are obsessed</h2>
+            <div class="testimonials">
+                <div class="testi">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"Pulled a card for my situationship and the message literally made me put my phone DOWN. How did it know??"</p>
+                    <p class="testi-name">@britneyreads</p>
+                </div>
+                <div class="testi">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"The baby daddy drama reading had me crying in my car. Felt so seen. I pull one every single morning now."</p>
+                    <p class="testi-name">@mamimayhem_fan</p>
+                </div>
+                <div class="testi">
+                    <div class="testi-stars">★★★★★</div>
+                    <p class="testi-text">"Finally an oracle that doesn't talk to me like a yoga instructor. Chaotic Daily Oracle gets the assignment."</p>
+                    <p class="testi-name">@xo_celesteee</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section seo-section" id="about">
+            <h2>What is the Chaotic Daily Oracle?</h2>
+            <p>The Chaotic Daily Oracle is a free daily oracle card reading platform designed for real women dealing with real life. Unlike traditional tarot or oracle apps that take themselves too seriously, we give you spiritual guidance that actually speaks your language — whether you're navigating a healing era, manifesting your money glow up, surviving co-parenting chaos, or just need a sign about that person you can't stop thinking about at 2am.</p>
+            <p>Every reading is crafted with intention and humor, pulling from a deck of original oracle messages across life categories like love, money, drama, healing, boss mode, and glow-up energy.</p>
+            <p>Chaotic Daily Oracle is your spiritual bestie with a sense of humor and a lot of emotional accuracy.</p>
+        </section>
+
+        <section class="section faq-section" id="faq">
+            <p class="section-label">✦ FAQ ✦</p>
+            <h2 class="section-title">Your questions, answered</h2>
+            <div class="faq-item">
+                <p class="faq-q">Are these oracle card readings accurate?</p>
+                <p class="faq-a">Think of the Chaotic Daily Oracle as your intuitive bestie who reflects back the energy you're already sitting in. The messages are designed to resonate with real situations and give you something to reflect on — not predict your future, but illuminate your present.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-q">How often should I pull a card?</p>
+                <p class="faq-a">Pull as many as you need. Most people do one pull per situation per day for the clearest energy. Pulling multiple for the same thing can create confusion — trust your first card.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-q">Is this different from tarot?</p>
+                <p class="faq-a">Yes! Tarot uses a structured 78-card system with deep symbolism and spreads. Oracle cards (like ours) are more free-form — less rules, more vibes. Great for quick guidance, daily check-ins, and people who are new to card reading.</p>
+            </div>
+            <div class="faq-item">
+                <p class="faq-q">Is the Chaotic Daily Oracle free?</p>
+                <p class="faq-a">Yes — completely free! We're supported by ads and our community. Pull as many cards as you want, share your readings, and if you love it, check out our site for more.</p>
+            </div>
+        </section>
+
+        <section class="cta-strip">
+            <h2>Get your daily reading delivered</h2>
+            <p>Subscribe for your free daily oracle drop. No spam, just good vibes and guidance.</p>
+            <div class="email-row">
+                <input type="email" placeholder="your@email.com">
+                <button>Subscribe Free</button>
             </div>
         </section>
     </main>

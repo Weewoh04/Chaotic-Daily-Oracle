@@ -393,6 +393,9 @@ let currentCard = null;
 document.getElementById('pull-card-btn').addEventListener('click', pullCard);
 document.getElementById('pull-again-btn').addEventListener('click', pullCard);
 document.getElementById('card').addEventListener('click', flipCard);
+document.getElementById('pinterest-share').addEventListener('click', shareOnPinterest);
+document.getElementById('copy-caption').addEventListener('click', copyTikTokCaption);
+document.getElementById('copy-reading').addEventListener('click', copyReading);
 
 // Initialize daily card on page load
 document.addEventListener('DOMContentLoaded', initDailyCard);
@@ -451,13 +454,86 @@ function pullCard() {
     document.getElementById('card').classList.remove('flipped');
     document.querySelector('.card-back').classList.add('hidden');
     document.querySelector('.card-front').classList.remove('hidden');
+    hideShareActions();
 }
 
 function flipCard() {
     const card = document.getElementById('card');
+    const willFlipToBack = !card.classList.contains('flipped');
     card.classList.toggle('flipped');
+
     setTimeout(() => {
         document.querySelector('.card-front').classList.toggle('hidden');
         document.querySelector('.card-back').classList.toggle('hidden');
+        if (willFlipToBack) {
+            showShareActions();
+        } else {
+            hideShareActions();
+        }
     }, 300);
+}
+
+function shareOnPinterest() {
+    if (!currentCard) return;
+    const pageUrl = window.location.href;
+    const description = `"${currentCard.message}" — ${currentCard.title} vibes from Chaotic Daily Oracle.`;
+    const imageUrl = 'https://chaoticdailyoracle.com/card-share.jpg';
+    const pinterestUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(pageUrl)}&description=${encodeURIComponent(description)}&media=${encodeURIComponent(imageUrl)}`;
+    window.open(pinterestUrl, '_blank');
+}
+
+function copyTikTokCaption() {
+    if (!currentCard) return;
+    const topicTag = currentCard.title.toLowerCase().replace(/[^a-z0-9]+/gi, '');
+    const caption = `POV: the oracle pulled ${currentCard.vibe} for my ${currentCard.title} situation 🔮 Pull yours free at chaoticdailyoracle.com #oracle #dailycard #${topicTag}era`;
+    copyTextToClipboard(caption);
+}
+
+function copyReading() {
+    if (!currentCard) return;
+    const readingText = `${currentCard.vibe}: ${currentCard.message}`;
+    copyTextToClipboard(readingText);
+}
+
+function copyTextToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+            .then(() => showToast('Copied!'))
+            .catch(() => showToast('Copy failed'));
+    } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            showToast('Copied!');
+        } catch (err) {
+            showToast('Copy failed');
+        }
+        document.body.removeChild(textarea);
+    }
+}
+
+let toastTimeout = null;
+
+function showToast(message) {
+    const toast = document.getElementById('copy-toast');
+    toast.textContent = message;
+    toast.classList.remove('hidden');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+        toast.classList.add('hidden');
+    }, 1800);
+}
+
+function showShareActions() {
+    document.getElementById('share-actions').classList.remove('hidden');
+}
+
+function hideShareActions() {
+    document.getElementById('share-actions').classList.add('hidden');
 }
