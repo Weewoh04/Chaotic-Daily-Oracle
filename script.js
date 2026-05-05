@@ -419,6 +419,7 @@ document.getElementById('clear-history').addEventListener('click', clearHistory)
 // Initialize daily card on page load
 document.addEventListener('DOMContentLoaded', () => {
     initDailyCard();
+    initCosmicEnergy();
     renderRecentReadings();
 });
 
@@ -429,6 +430,30 @@ function initDailyCard() {
     document.getElementById('daily-message').textContent = dailyCard.message;
     updateCountdown();
     setInterval(updateCountdown, 1000);
+}
+
+function initCosmicEnergy() {
+    const now = new Date();
+    const dateOptions = { weekday: 'long', month: 'long', day: 'numeric' };
+    const dateLabel = now.toLocaleDateString('en-US', dateOptions);
+    const moon = getMoonPhase();
+    document.getElementById('cosmic-date').textContent = `${dateLabel} · ${moon.phase}`;
+    document.getElementById('moon-banner').textContent = `${moon.emoji} ${moon.phase} · Today's Power: ${moon.power}`;
+}
+
+function getMoonPhase() {
+    const now = new Date();
+    const known = new Date('2000-01-06');
+    const diff = (now - known) / (1000 * 60 * 60 * 24);
+    const cycle = diff % 29.53;
+    if (cycle < 1.85) return { phase: 'New Moon', emoji: '🌑', power: 'New beginnings' };
+    if (cycle < 7.38) return { phase: 'Waxing Crescent', emoji: '🌒', power: 'Set intentions' };
+    if (cycle < 9.22) return { phase: 'First Quarter', emoji: '🌓', power: 'Take action' };
+    if (cycle < 14.77) return { phase: 'Waxing Gibbous', emoji: '🌔', power: 'Refine & grow' };
+    if (cycle < 16.61) return { phase: 'Full Moon', emoji: '🌕', power: 'Release & manifest' };
+    if (cycle < 22.15) return { phase: 'Waning Gibbous', emoji: '🌖', power: 'Express gratitude' };
+    if (cycle < 23.99) return { phase: 'Last Quarter', emoji: '🌗', power: 'Let go' };
+    return { phase: 'Waning Crescent', emoji: '🌘', power: 'Rest & reflect' };
 }
 
 function getCardOfTheDay() {
