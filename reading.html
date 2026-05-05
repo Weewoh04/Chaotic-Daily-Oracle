@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaotic Daily Oracle - Full Reading</title>
+    <meta name="description" content="Read the full explanation of your Chaotic Daily Oracle card and discover the deeper message behind your pull.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <h1 class="nav-title">Chaotic Daily Oracle</h1>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home">Home</a></li>
+                    <li><a href="index.html#pull">Pull a Card</a></li>
+                    <li><a href="index.html#readings">Readings</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#faq">FAQ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="reading-page">
+        <h1>Your Full Oracle Reading</h1>
+        <div id="reading-content">
+            <div class="reading-card hidden" id="reading-card">
+                <div class="reading-row">
+                    <span>Card</span>
+                    <p id="reading-title"></p>
+                </div>
+                <div class="reading-row">
+                    <span>Short Message</span>
+                    <p id="reading-message"></p>
+                </div>
+                <div class="reading-row">
+                    <span>Today’s Vibe</span>
+                    <p id="reading-vibe"></p>
+                </div>
+                <div class="reading-row">
+                    <span>Avoid This</span>
+                    <p id="reading-avoid"></p>
+                </div>
+                <div class="reading-row">
+                    <span>Do This Instead</span>
+                    <p id="reading-do"></p>
+                </div>
+            </div>
+
+            <section class="reading-detail hidden" id="reading-detail">
+                <h2>In-Depth Explanation</h2>
+                <p id="reading-in-depth"></p>
+            </section>
+
+            <div class="reading-empty hidden" id="reading-empty">
+                <p>It looks like there isn't a saved reading yet.</p>
+                <p>Go back to the home page, pull a card, and tap "Read More" to see the full explanation.</p>
+                <button id="back-home-btn" class="action-button">Back to Home</button>
+            </div>
+        </div>
+
+        <div class="reading-actions">
+            <button id="back-home-btn-2" class="action-button">Back to Home</button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-ad">
+            <p>Ad Placeholder - Sticky Footer</p>
+        </div>
+        <p>&copy; 2023 Chaotic Daily Oracle. All rights reserved.</p>
+    </footer>
+
+    <script src="reading.js"></script>
+</body>
+</html>

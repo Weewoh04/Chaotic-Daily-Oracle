@@ -6,39 +6,23 @@
     <title>Chaotic Daily Oracle - Daily Tarot Card Generator</title>
     <meta name="description" content="Get your daily chaotic oracle card pull for feelings, spirals, and main character energy. Funny, witchy, empowering tarot readings.">
     <meta name="keywords" content="tarot, oracle, daily card, chaotic divine feminine, witchy readings, tarot generator">
-    <meta property="og:title" content="Chaotic Daily Oracle — Pull a Free Card for Your Situation">
-    <meta property="og:description" content="Free oracle card readings for love, money, baby daddy drama, healing era, boss mode & more. Your chaotic spiritual bestie.">
-    <meta property="og:image" content="https://chaotic-daily-oracle.vercel.app/og-image.jpg">
-    <meta property="og:url" content="https://chaoticdailyoracle.com">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Chaotic Daily Oracle — Pull a Free Card for Your Situation">
-    <meta name="twitter:description" content="Free oracle card readings for love, money, baby daddy drama, healing era, boss mode & more. Your chaotic spiritual bestie.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700;800&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <!-- Google Analytics: Insert your GA tracking code here -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_TRACKING_ID');
     </script>
-    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-    <div id="promo-banner" class="promo-banner">
-        <a href="https://mamimayhem.com/" target="_blank">✦ New drops at Mami Mayhem — Shop the collection →</a>
-        <button id="dismiss-banner" class="dismiss-btn">×</button>
-    </div>
     <header>
         <nav>
             <div class="nav-container">
                 <h1 class="nav-title">Chaotic Daily Oracle</h1>
                 <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#home">Home</a></li>
                     <li><a href="#pull">Pull a Card</a></li>
                     <li><a href="#readings">Readings</a></li>
                     <li><a href="#about">About</a></li>
@@ -50,18 +34,12 @@
 
     <main id="home">
         <section class="hero">
-            <canvas id="stars"></canvas>
-            <div class="hero-glow hero-glow-1"></div>
-            <div class="hero-glow hero-glow-2"></div>
             <h1>Chaotic Daily Oracle</h1>
             <p>A daily card pull for your feelings, your spiral, and your main character era.</p>
             <button id="pull-card-btn" class="cta-button">Pull My Card</button>
-            <p id="selected-topic" style="color:rgba(232,223,200,0.8);margin-top:1rem;font-size:0.95rem;">Pick a topic to pull a matching category card.</p>
         </section>
 
-        <div class="section-divider"></div>
-
-        <section class="card-of-day oracle-stage">
+        <section class="card-of-day">
             <h2>Card of the Day</h2>
             <div class="daily-card-banner">
                 <div class="daily-card-content">
@@ -75,33 +53,11 @@
             </div>
         </section>
 
-        <div class="section-divider"></div>
-
         <!-- Ad placeholder above card result -->
         <div class="ad-placeholder">
             <!-- Google AdSense: Insert AdSense code here for banner ad above card -->
             <p>Ad Placeholder - Above Card</p>
         </div>
-
-        <section class="zodiac-section">
-            <p class="section-label">✦ Choose Your Sign ✦</p>
-            <div class="zodiac-scroll">
-                <button class="zodiac-btn" data-sign="Aries">♈ Aries</button>
-                <button class="zodiac-btn" data-sign="Taurus">♉ Taurus</button>
-                <button class="zodiac-btn" data-sign="Gemini">♊ Gemini</button>
-                <button class="zodiac-btn" data-sign="Cancer">♋ Cancer</button>
-                <button class="zodiac-btn" data-sign="Leo">♌ Leo</button>
-                <button class="zodiac-btn" data-sign="Virgo">♍ Virgo</button>
-                <button class="zodiac-btn" data-sign="Libra">♎ Libra</button>
-                <button class="zodiac-btn" data-sign="Scorpio">♏ Scorpio</button>
-                <button class="zodiac-btn" data-sign="Sagittarius">♐ Sagittarius</button>
-                <button class="zodiac-btn" data-sign="Capricorn">♑ Capricorn</button>
-                <button class="zodiac-btn" data-sign="Aquarius">♒ Aquarius</button>
-                <button class="zodiac-btn" data-sign="Pisces">♓ Pisces</button>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
 
         <section id="card-result" class="card-result hidden">
             <div class="card-container">
@@ -112,14 +68,11 @@
                     <div class="card-back hidden">
                         <h2 id="card-title"></h2>
                         <p id="card-message"></p>
-                        <h3>Today’s Vibe</h3>
-                        <p id="card-vibe"></p>
-                        <h3>Avoid This</h3>
-                        <p id="card-avoid"></p>
-                        <h3>Do This Instead</h3>
-                        <p id="card-do"></p>
-                        <h3>Deep Reading</h3>
-                        <p id="card-explanation" style="margin-top:1rem;color:rgba(232,223,200,0.88);line-height:1.85;font-size:0.94rem;max-width:720px;text-align:left;"></p>
+                        <div class="card-preview-meta">
+                            <h3>Today’s Vibe</h3>
+                            <p id="card-vibe"></p>
+                        </div>
+                        <button id="read-more-btn" class="action-button" type="button">Read More</button>
                     </div>
                 </div>
             </div>
@@ -127,28 +80,13 @@
                 <button id="pull-again-btn" class="action-button">Pull Again</button>
                 <p id="share-text">Share this: "My chaotic oracle card today is [Card Title]. Check yours at ChaoticDailyOracle.com!"</p>
             </div>
-            <div id="viralPanel" style="display:none;max-width:460px;margin:1.5rem auto;background:rgba(19,10,42,0.7);border:1px solid rgba(155,127,212,0.25);border-radius:16px;padding:1.5rem;">
-                <p style="font-size:.65rem;letter-spacing:.2em;color:#9B7FD4;text-transform:uppercase;margin-bottom:1rem">✦ Share Your Reading</p>
-                
-                <p style="font-size:.8rem;color:rgba(232,223,200,0.5);font-family:'Jost',sans-serif;margin-bottom:.75rem">TikTok caption:</p>
-                <div id="tiktokCaption" style="background:rgba(0,0,0,0.3);border-radius:8px;padding:1rem;font-size:.82rem;color:rgba(232,223,200,0.8);line-height:1.7;font-family:'Jost',sans-serif;margin-bottom:.75rem"></div>
-                
-                <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-                    <button onclick="copyTikTok()" style="flex:1">Copy TikTok Caption</button>
-                    <button onclick="copyPinterest()" style="flex:1">Copy Pinterest Text</button>
-                    <button onclick="shareX()" style="flex:1">Post to X/Twitter</button>
-                </div>
-            </div>
             <div class="share-actions hidden" id="share-actions">
                 <button class="share-button" id="pinterest-share">Share on Pinterest</button>
                 <button class="share-button" id="copy-caption">Copy TikTok Caption</button>
                 <button class="share-button" id="copy-reading">Copy Reading</button>
             </div>
-            <button id="friend-card-btn" class="action-button">Pull a Card for a Friend</button>
             <div class="toast hidden" id="copy-toast">Copied!</div>
         </section>
-
-        <div class="section-divider"></div>
 
         <section class="section history-section" id="recent-readings">
             <p class="section-label">✦ Your Recent Readings ✦</p>
@@ -163,62 +101,49 @@
             </div>
         </section>
 
-        <div class="section-divider"></div>
-
         <!-- Ad placeholder below card result -->
         <div class="ad-placeholder">
-            <!-- Google AdSense: Insert Google AdSense code here for banner ad below card -->
+            <!-- Google AdSense: Insert AdSense code here for banner ad below card -->
             <p>Ad Placeholder - Below Card</p>
         </div>
-
-        <section class="section cosmic-energy-section">
-            <p class="section-label">✦ Daily Cosmic Energy ✦</p>
-            <h2 id="cosmic-date" style="font-size:2rem;line-height:1.1;margin-top:.5rem;color:#E8DFC8;font-family:'Cormorant Garamond',serif;"></h2>
-            <div style="background:rgba(19,10,42,0.85);border:1px solid rgba(155,127,212,0.3);border-radius:24px;padding:1.5rem;margin-top:1rem;text-align:center;">
-                <p id="moon-banner" style="font-size:1.1rem;color:#F4E7C1;font-family:'Jost',sans-serif;margin:0;line-height:1.5;"></p>
-                <p style="margin-top:.85rem;font-size:.82rem;color:rgba(232,223,200,0.65);font-family:'Jost',sans-serif;">Share this screenshot for free daily traffic — the cosmic energy changes every day.</p>
-            </div>
-        </section>
 
         <section class="section" id="pull">
             <p class="section-label">✦ Choose your situation ✦</p>
             <h2 class="section-title">What do you need clarity on?</h2>
             <p class="section-sub">Tap a topic and then pull your card for real-talk guidance</p>
             <div class="situation-grid">
-                <div class="sit-card love" data-topic="love">
+                <div class="sit-card love">
                     <span class="sit-icon">💋</span>
                     <p class="sit-name">Love Era</p>
                     <p class="sit-desc">Romance, attraction, and relationship energy</p>
                 </div>
-                <div class="sit-card money" data-topic="money">
+                <div class="sit-card money">
                     <span class="sit-icon">💰</span>
                     <p class="sit-name">Money Moves</p>
                     <p class="sit-desc">Abundance, hustle, and financial instincts</p>
                 </div>
-                <div class="sit-card drama" data-topic="drama">
+                <div class="sit-card drama">
                     <span class="sit-icon">🍵</span>
                     <p class="sit-name">Baby Daddy Drama</p>
                     <p class="sit-desc">Co-parenting, ex energy, and messy texts</p>
                 </div>
-                <div class="sit-card healing" data-topic="healing">
+                <div class="sit-card healing">
                     <span class="sit-icon">🌿</span>
                     <p class="sit-name">Healing Era</p>
                     <p class="sit-desc">Self-care, boundaries, and emotional rebirth</p>
                 </div>
-                <div class="sit-card boss" data-topic="boss">
+                <div class="sit-card boss">
                     <span class="sit-icon">👑</span>
                     <p class="sit-name">Boss Mode</p>
                     <p class="sit-desc">Career, confidence, and your power moves</p>
                 </div>
-                <div class="sit-card clarity" data-topic="clarity">
+                <div class="sit-card clarity">
                     <span class="sit-icon">🔮</span>
                     <p class="sit-name">Clarity & Decisions</p>
                     <p class="sit-desc">The choice you keep replaying in your head</p>
                 </div>
             </div>
         </section>
-
-        <div class="section-divider"></div>
 
         <section class="section feature-section" id="readings">
             <p class="section-label">✦ All readings ✦</p>
@@ -264,8 +189,6 @@
             </div>
         </section>
 
-        <div class="section-divider"></div>
-
         <section class="section testimonials-section">
             <p class="section-label">✦ The people have spoken ✦</p>
             <h2 class="section-title">Girlies are obsessed</h2>
@@ -288,16 +211,12 @@
             </div>
         </section>
 
-        <div class="section-divider"></div>
-
         <section class="section seo-section" id="about">
             <h2>What is the Chaotic Daily Oracle?</h2>
             <p>The Chaotic Daily Oracle is a free daily oracle card reading platform designed for real women dealing with real life. Unlike traditional tarot or oracle apps that take themselves too seriously, we give you spiritual guidance that actually speaks your language — whether you're navigating a healing era, manifesting your money glow up, surviving co-parenting chaos, or just need a sign about that person you can't stop thinking about at 2am.</p>
             <p>Every reading is crafted with intention and humor, pulling from a deck of original oracle messages across life categories like love, money, drama, healing, boss mode, and glow-up energy.</p>
             <p>Chaotic Daily Oracle is your spiritual bestie with a sense of humor and a lot of emotional accuracy.</p>
         </section>
-
-        <div class="section-divider"></div>
 
         <section class="section faq-section" id="faq">
             <p class="section-label">✦ FAQ ✦</p>
@@ -320,8 +239,6 @@
             </div>
         </section>
 
-        <div class="section-divider"></div>
-
         <section class="cta-strip">
             <h2>Get your daily reading delivered</h2>
             <p>Subscribe for your free daily oracle drop. No spam, just good vibes and guidance.</p>
@@ -330,15 +247,6 @@
                 <button>Subscribe Free</button>
             </div>
         </section>
-
-        <div class="ticker-strip">
-            <div class="ticker-track">
-                <span>✨ Daily reading drops at midnight</span>
-                <span>🔮 Share your chaos with your squad</span>
-                <span>💫 Zodiac energy feels extra vivid</span>
-                <span>🌙 Pull your main character moment now</span>
-            </div>
-        </div>
     </main>
 
     <footer>
@@ -347,31 +255,8 @@
             <!-- Google AdSense: Insert AdSense code here for sticky footer ad -->
             <p>Ad Placeholder - Sticky Footer</p>
         </div>
-        <div style="margin-bottom:1rem;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;font-size:.78rem;">
-          <a href="index.html" style="color:rgba(232,223,200,0.5)">Home</a>
-          <a href="blog.html" style="color:rgba(232,223,200,0.5)">Blog</a>
-          <a href="#faq" style="color:rgba(232,223,200,0.5)">FAQ</a>
-          <a href="#pull" style="color:rgba(232,223,200,0.5)">Pull a Card</a>
-          <a href="https://mamimayhem.com" style="color:#C8973A">Mami Mayhem Shop ✦</a>
-          <a href="sitemap.xml" style="color:rgba(232,223,200,0.3)">Sitemap</a>
-        </div>
-        <p>&copy; <span id="yr"></span> Chaotic Daily Oracle · Part of the <a href="https://mamimayhem.com" style="color:#C8973A">Mami Mayhem</a> universe</p>
-        <script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
+        <p>&copy; 2023 Chaotic Daily Oracle. All rights reserved.</p>
     </footer>
-
-    <!-- Friend Card Modal -->
-    <div id="friend-modal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close" id="close-modal">&times;</span>
-            <h2>Pull a Card for a Friend</h2>
-            <input type="text" id="friend-name" placeholder="Enter friend's name" maxlength="50">
-            <button id="pull-friend-card" class="action-button">Pull Card</button>
-            <div id="friend-reading" class="hidden">
-                <p id="friend-text"></p>
-                <button id="copy-friend-reading" class="share-button">Copy & Send</button>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
