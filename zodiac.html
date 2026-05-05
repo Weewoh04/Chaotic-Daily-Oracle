@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Zodiac Pulls - Chaotic Daily Oracle</title>
+<meta name="description" content="Choose your zodiac sign and pull a free daily zodiac oracle card for today's energy, focus, affirmation, and chaotic little nudge.">
+<meta name="keywords" content="daily zodiac pulls, zodiac oracle, daily horoscope card, astrology card pull, free zodiac reading">
+<meta property="og:title" content="Daily Zodiac Pulls - Chaotic Daily Oracle">
+<meta property="og:description" content="Pull a free daily zodiac oracle card for your sign.">
+<meta property="og:image" content="https://chaotic-daily-oracle.vercel.app/og-image.png">
+<meta property="og:url" content="https://chaotic-daily-oracle.vercel.app/zodiac.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF6EF;
+    --ink: #1A1209;
+    --gold: #C8973A;
+    --gold-light: #F0D9A8;
+    --rose: #C4516B;
+    --rose-light: #F4D0D8;
+    --sage: #4A7C65;
+    --sage-light: #C8DDD4;
+    --plum: #6B3D7A;
+    --plum-light: #DBC8E2;
+    --sky: #2E6B99;
+    --sky-light: #C8DFF0;
+    --amber: #B85C1A;
+    --amber-light: #F0D5BA;
+    --border: rgba(26,18,9,0.12);
+    --shadow: 0 14px 40px rgba(26,18,9,0.12);
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  nav {
+    background: var(--ink);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { font-style: italic; color: var(--gold-light); }
+  .nav-links {
+    display: flex;
+    gap: 1.4rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+  .nav-shop {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 0.42rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100vh - 64px);
+    display: grid;
+    align-items: center;
+    padding: 4rem 2rem 3rem;
+    background:
+      radial-gradient(circle at 18% 26%, rgba(200,151,58,0.20), transparent 28%),
+      radial-gradient(circle at 82% 20%, rgba(196,81,107,0.18), transparent 30%),
+      linear-gradient(135deg, #FAF6EF 0%, #F4E7D7 52%, #E8F1EC 100%);
+  }
+  .hero-inner {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 3rem;
+    align-items: center;
+  }
+  .eyebrow {
+    color: var(--gold);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.7rem, 7vw, 5.2rem);
+    line-height: 0.98;
+    max-width: 720px;
+  }
+  h1 em { color: var(--rose); font-style: italic; }
+  .hero-sub {
+    color: rgba(26,18,9,0.64);
+    font-size: 1.08rem;
+    line-height: 1.65;
+    font-weight: 300;
+    max-width: 570px;
+    margin-top: 1.2rem;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  .btn {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.9rem 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.18s, opacity 0.18s, background 0.18s;
+  }
+  .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+  .btn-primary { background: var(--ink); color: white; }
+  .btn-gold { background: var(--gold); color: var(--ink); }
+  .zodiac-wheel {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(26,18,9,0.12);
+    background:
+      repeating-conic-gradient(from -8deg, rgba(26,18,9,0.08) 0 1deg, transparent 1deg 30deg),
+      radial-gradient(circle, white 0 35%, rgba(240,217,168,0.6) 36% 37%, rgba(255,255,255,0.78) 38% 62%, rgba(26,18,9,0.05) 63% 100%);
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .wheel-center {
+    position: absolute;
+    inset: 31%;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--gold-light);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    line-height: 1.2;
+    padding: 1rem;
+  }
+  .wheel-mark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2.1rem;
+    height: 2.1rem;
+    margin: -1.05rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,0.88);
+    border: 1px solid rgba(26,18,9,0.12);
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: rgba(26,18,9,0.72);
+  }
+  .section {
+    width: min(1080px, 100%);
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .section-label {
+    color: var(--gold);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    text-align: center;
+    color: rgba(26,18,9,0.56);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 620px;
+    margin: 0 auto 2rem;
+  }
+  .sign-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.85rem;
+  }
+  .sign-card {
+    min-height: 116px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    padding: 1rem;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(26,18,9,0.05);
+    transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+  }
+  .sign-card:hover, .sign-card.active {
+    transform: translateY(-3px);
+    border-color: rgba(200,151,58,0.75);
+    box-shadow: var(--shadow);
+  }
+  .sign-glyph {
+    font-family: 'Playfair Display', serif;
+    color: var(--rose);
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .sign-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.08rem;
+    margin-bottom: 0.12rem;
+  }
+  .sign-date {
+    color: rgba(26,18,9,0.52);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .oracle-stage {
+    background: var(--ink);
+    color: white;
+    padding: 4.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .oracle-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 22% 28%, rgba(107,61,122,0.32), transparent 32%),
+      radial-gradient(circle at 78% 64%, rgba(200,151,58,0.18), transparent 34%);
+    pointer-events: none;
+  }
+  .reading-wrap {
+    position: relative;
+    width: min(980px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr);
+    gap: 2.2rem;
+    align-items: center;
+  }
+  .zodiac-card {
+    min-height: 420px;
+    border-radius: 8px;
+    border: 2px solid rgba(200,151,58,0.45);
+    background: linear-gradient(155deg, #251744, #173D45);
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 70px rgba(0,0,0,0.28);
+  }
+  .card-frame {
+    flex: 1;
+    border: 1px solid rgba(240,217,168,0.32);
+    border-radius: 6px;
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-kicker {
+    color: var(--gold-light);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .card-sign {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 2.2rem;
+    margin-top: 0.65rem;
+  }
+  .card-word {
+    margin-top: auto;
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 1.55rem;
+    line-height: 1.15;
+  }
+  .card-date {
+    margin-top: 1rem;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .reading-panel {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.045);
+    padding: 2rem;
+  }
+  .reading-panel h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.05;
+    margin-bottom: 0.85rem;
+  }
+  .reading-panel h2 em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+  .reading-text {
+    color: rgba(255,255,255,0.72);
+    font-size: 1rem;
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 620px;
+  }
+  .reading-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+    margin: 1.5rem 0;
+  }
+  .meta-box {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 0.95rem;
+    background: rgba(255,255,255,0.04);
+  }
+  .meta-label {
+    color: var(--gold);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .meta-value {
+    color: rgba(255,255,255,0.82);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+  .affirmation {
+    color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.6;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.2rem;
+  }
+  .learn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .learn-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.35rem;
+  }
+  .learn-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.18rem;
+    margin-bottom: 0.55rem;
+  }
+  .learn-card p {
+    color: rgba(26,18,9,0.62);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .cta-strip {
+    background: white;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 1.45rem;
+    margin-bottom: 1rem;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.3rem;
+    margin-bottom: 1.4rem;
+  }
+  @media (max-width: 840px) {
+    nav { padding: 0.9rem 1rem; gap: 1rem; align-items: flex-start; }
+    .nav-links { display: none; }
+    .hero { min-height: auto; }
+    .hero-inner, .reading-wrap { grid-template-columns: 1fr; }
+    .zodiac-wheel { max-width: 330px; margin: 0 auto; }
+    .reading-meta { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .hero, .section, .oracle-stage { padding-left: 1rem; padding-right: 1rem; }
+    .sign-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .reading-panel { padding: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Daily Zodiac Pulls",
+  "description": "Free daily zodiac oracle pulls for all twelve astrology signs.",
+  "url": "https://chaotic-daily-oracle.vercel.app/zodiac.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Chaotic Daily Oracle",
+    "url": "https://chaotic-daily-oracle.vercel.app/"
+  }
+}
+</script>
+
+<nav>
+  <a class="nav-logo" href="index.html">Chaotic <span>Daily</span> Oracle</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pull">Pull a Card</a></li>
+    <li><a class="active" href="zodiac.html">Zodiac</a></li>
+    <li><a href="index.html#readings">Readings</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+  </ul>
+  <a href="https://mamimayhem.com" class="nav-shop">Shop Mami Mayhem</a>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow">Daily astrology card pull</p>
+        <h1>Choose your sign. Pull your <em>daily zodiac</em> message.</h1>
+        <p class="hero-sub">A fast astrology-inspired oracle reading for your sign's energy today: the focus, the nudge, the tiny truth you already knew but needed someone dramatic to say out loud.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#signs">Choose Your Sign</a>
+          <a class="btn btn-gold" href="index.html#pull">General Oracle</a>
+        </div>
+      </div>
+      <div class="zodiac-wheel" aria-hidden="true">
+        <div class="wheel-center">Daily<br>Zodiac<br>Pulls</div>
+        <span class="wheel-mark" style="transform: rotate(0deg) translateY(-150px) rotate(0deg);">Ari</span>
+        <span class="wheel-mark" style="transform: rotate(30deg) translateY(-150px) rotate(-30deg);">Tau</span>
+        <span class="wheel-mark" style="transform: rotate(60deg) translateY(-150px) rotate(-60deg);">Gem</span>
+        <span class="wheel-mark" style="transform: rotate(90deg) translateY(-150px) rotate(-90deg);">Can</span>
+        <span class="wheel-mark" style="transform: rotate(120deg) translateY(-150px) rotate(-120deg);">Leo</span>
+        <span class="wheel-mark" style="transform: rotate(150deg) translateY(-150px) rotate(-150deg);">Vir</span>
+        <span class="wheel-mark" style="transform: rotate(180deg) translateY(-150px) rotate(-180deg);">Lib</span>
+        <span class="wheel-mark" style="transform: rotate(210deg) translateY(-150px) rotate(-210deg);">Sco</span>
+        <span class="wheel-mark" style="transform: rotate(240deg) translateY(-150px) rotate(-240deg);">Sag</span>
+        <span class="wheel-mark" style="transform: rotate(270deg) translateY(-150px) rotate(-270deg);">Cap</span>
+        <span class="wheel-mark" style="transform: rotate(300deg) translateY(-150px) rotate(-300deg);">Aqu</span>
+        <span class="wheel-mark" style="transform: rotate(330deg) translateY(-150px) rotate(-330deg);">Pis</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="signs">
+    <p class="section-label">All twelve signs</p>
+    <h2 class="section-title">Pick Your Zodiac Sign</h2>
+    <p class="section-sub">Your daily pull refreshes with the date, so each sign gets one clear message to carry through the day.</p>
+    <div class="sign-grid" id="signGrid"></div>
+  </section>
+
+  <section class="oracle-stage" id="daily-pull">
+    <div class="reading-wrap">
+      <div class="zodiac-card">
+        <div class="card-frame">
+          <p class="card-kicker">Today's Zodiac Card</p>
+          <p class="card-sign" id="cardSign">Aries</p>
+          <p class="card-word" id="cardWord">Bold Timing</p>
+          <p class="card-date" id="cardDate">Daily pull</p>
+        </div>
+      </div>
+      <div class="reading-panel">
+        <p class="eyebrow">Your sign's message</p>
+        <h2 id="readingTitle">Aries, your card is <em>Bold Timing</em></h2>
+        <p class="reading-text" id="readingText"></p>
+        <div class="reading-meta">
+          <div class="meta-box">
+            <p class="meta-label">Focus</p>
+            <p class="meta-value" id="focusText"></p>
+          </div>
+          <div class="meta-box">
+            <p class="meta-label">Do This</p>
+            <p class="meta-value" id="actionText"></p>
+          </div>
+        </div>
+        <p class="affirmation" id="affirmationText"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">How to use it</p>
+    <h2 class="section-title">A Little Astrology, A Little Oracle</h2>
+    <p class="section-sub">Use this as a daily check-in, not a life sentence. The point is reflection, not panic-refreshing your destiny.</p>
+    <div class="learn-grid">
+      <div class="learn-card">
+        <h3>Pull in the morning</h3>
+        <p>Choose your sun sign, rising sign, or the sign you feel most connected to today. Let the message become your theme for the day.</p>
+      </div>
+      <div class="learn-card">
+        <h3>Read the action</h3>
+        <p>The action prompt keeps the reading practical. One small move beats spiraling with five open tabs and a half-finished journal entry.</p>
+      </div>
+      <div class="learn-card">
+        <h3>Come back tomorrow</h3>
+        <p>Each sign's pull changes daily. If today's message lands a little too loudly, write it down and watch how it shows up.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <div class="section">
+      <p class="section-label">Need another angle?</p>
+      <h2 class="section-title">Pull for love, money, healing, or chaos.</h2>
+      <p class="section-sub">The zodiac gives you today's weather. The oracle gives you the group chat translation.</p>
+      <a class="btn btn-primary" href="index.html#pull">Pull a General Card</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p class="footer-logo">Chaotic Daily Oracle</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#pull">Pull a Card</a>
+    <a href="zodiac.html">Zodiac</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="https://mami-mayhem.myshopify.com">Mami Mayhem Shop</a>
+  </div>
+  <p>&copy; 2025 Chaotic Daily Oracle - Part of the Mami Mayhem universe</p>
+  <p style="margin-top:0.5rem;font-size:0.7rem;opacity:0.4;">For entertainment purposes. Not a substitute for professional advice.</p>
+</footer>
+
+<script>
+const signs = [
+  { name: "Aries", dates: "Mar 21 - Apr 19", element: "Fire" },
+  { name: "Taurus", dates: "Apr 20 - May 20", element: "Earth" },
+  { name: "Gemini", dates: "May 21 - Jun 20", element: "Air" },
+  { name: "Cancer", dates: "Jun 21 - Jul 22", element: "Water" },
+  { name: "Leo", dates: "Jul 23 - Aug 22", element: "Fire" },
+  { name: "Virgo", dates: "Aug 23 - Sep 22", element: "Earth" },
+  { name: "Libra", dates: "Sep 23 - Oct 22", element: "Air" },
+  { name: "Scorpio", dates: "Oct 23 - Nov 21", element: "Water" },
+  { name: "Sagittarius", dates: "Nov 22 - Dec 21", element: "Fire" },
+  { name: "Capricorn", dates: "Dec 22 - Jan 19", element: "Earth" },
+  { name: "Aquarius", dates: "Jan 20 - Feb 18", element: "Air" },
+  { name: "Pisces", dates: "Feb 19 - Mar 20", element: "Water" }
+];
+
+const pulls = [
+  {
+    word: "Bold Timing",
+    message: "The move you keep overthinking may need less research and more courage. Today rewards clean decisions, brave asks, and choosing motion over mental clutter.",
+    focus: "Make the first move without needing the whole staircase.",
+    action: "Send the message, make the offer, or choose the next step before noon.",
+    affirmation: "I can move with courage and still move with wisdom."
+  },
+  {
+    word: "Soft Power",
+    message: "You do not have to push to be powerful today. Your energy works best when it is calm, rooted, and impossible to rush.",
+    focus: "Protect your pace and stop performing urgency.",
+    action: "Say no to one thing that wants your energy but has not earned it.",
+    affirmation: "My calm is magnetic, clear, and fully mine."
+  },
+  {
+    word: "Receipts",
+    message: "Patterns are speaking louder than promises. Notice what repeats, what changes, and what only sounds good when someone is trying to keep access to you.",
+    focus: "Believe behavior before explanations.",
+    action: "Write down the pattern you keep talking yourself out of seeing.",
+    affirmation: "I trust evidence, intuition, and the truth in my body."
+  },
+  {
+    word: "Main Character",
+    message: "Today is asking you to take up a little more space. Not in a loud way, just in a way that stops shrinking your needs to keep everyone comfortable.",
+    focus: "Let yourself be visible without apologizing.",
+    action: "Wear the thing, post the thing, ask for the thing.",
+    affirmation: "I am allowed to be seen, wanted, chosen, and heard."
+  },
+  {
+    word: "Clean Slate",
+    message: "A reset is available, but it starts with not dragging yesterday's spiral into today's energy. Begin again without making a courtroom out of your past.",
+    focus: "Start fresh without needing a dramatic explanation.",
+    action: "Clear one small mess: a tab, a text thread, a corner, or a task.",
+    affirmation: "I can begin again as many times as I need."
+  },
+  {
+    word: "Money Honey",
+    message: "Your abundance energy is tied to how seriously you treat your own value. Stop discounting your magic just because it comes naturally to you.",
+    focus: "Own your worth before asking anyone else to recognize it.",
+    action: "Review one price, boundary, invoice, or money goal today.",
+    affirmation: "I receive well because I value myself well."
+  },
+  {
+    word: "No More Chasing",
+    message: "If it wants you, it can meet you halfway. Today is not for convincing, explaining, or auditioning for energy that should already recognize you.",
+    focus: "Withdraw effort from what only responds to your absence.",
+    action: "Do not double text, over-explain, or rescue the vibe.",
+    affirmation: "What is aligned with me does not require me to beg."
+  },
+  {
+    word: "Deep Clean",
+    message: "Your spirit wants less noise. A physical clean-up may unlock an emotional one, especially around old reminders, old obligations, and stale energy.",
+    focus: "Make room so the next version of you has somewhere to land.",
+    action: "Remove five things you no longer need from one visible space.",
+    affirmation: "I release clutter and welcome clarity."
+  },
+  {
+    word: "Divine Delay",
+    message: "The pause is not punishment. Something is still arranging itself behind the scenes, and forcing it today could make the answer smaller than it needs to be.",
+    focus: "Wait with dignity, not dread.",
+    action: "Choose one useful thing you can do while the answer develops.",
+    affirmation: "Timing can protect me as much as it redirects me."
+  },
+  {
+    word: "Boundary Era",
+    message: "Access to you is a privilege, not a subscription everyone gets to renew automatically. Today asks for clear edges and fewer guilt-based yeses.",
+    focus: "Notice where resentment is asking for a boundary.",
+    action: "Use one complete sentence: 'That does not work for me.'",
+    affirmation: "My boundaries are loving, honest, and necessary."
+  },
+  {
+    word: "Lucky Pivot",
+    message: "A small change of direction could open a better door than the plan you were clinging to. Stay flexible enough to catch the blessing when it swerves.",
+    focus: "Let the plot twist help you.",
+    action: "Try the alternate route, idea, contact, or timing.",
+    affirmation: "I am available for better than I planned."
+  },
+  {
+    word: "Heart Check",
+    message: "Your feelings are not random background noise. They are data. Today, listen before you dismiss, especially if your body gets loud before your brain does.",
+    focus: "Name what you feel without judging it.",
+    action: "Take ten quiet minutes and ask, 'What am I avoiding feeling?'",
+    affirmation: "My heart is wise, and I can hear it clearly."
+  }
+];
+
+function dateKey() {
+  const now = new Date();
+  return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+}
+
+function seededIndex(signName) {
+  const key = `${dateKey()}-${signName}`;
+  let hash = 0;
+  for (let i = 0; i < key.length; i++) {
+    hash = ((hash << 5) - hash) + key.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash) % pulls.length;
+}
+
+function formatToday() {
+  return new Intl.DateTimeFormat(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric"
+  }).format(new Date());
+}
+
+function selectSign(signName) {
+  const sign = signs.find(item => item.name === signName) || signs[0];
+  const pull = pulls[seededIndex(sign.name)];
+  document.querySelectorAll(".sign-card").forEach(card => {
+    card.classList.toggle("active", card.dataset.sign === sign.name);
+  });
+  document.getElementById("cardSign").textContent = sign.name;
+  document.getElementById("cardWord").textContent = pull.word;
+  document.getElementById("cardDate").textContent = `${formatToday()} - ${sign.element} sign`;
+  document.getElementById("readingTitle").innerHTML = `${sign.name}, your card is <em>${pull.word}</em>`;
+  document.getElementById("readingText").textContent = pull.message;
+  document.getElementById("focusText").textContent = pull.focus;
+  document.getElementById("actionText").textContent = pull.action;
+  document.getElementById("affirmationText").textContent = `"${pull.affirmation}"`;
+}
+
+function renderSigns() {
+  const grid = document.getElementById("signGrid");
+  grid.innerHTML = signs.map(sign => `
+    <button class="sign-card" type="button" data-sign="${sign.name}" onclick="selectSign('${sign.name}'); document.getElementById('daily-pull').scrollIntoView({ behavior: 'smooth', block: 'start' });">
+      <div class="sign-glyph">${sign.name.slice(0, 3)}</div>
+      <div class="sign-name">${sign.name}</div>
+      <div class="sign-date">${sign.dates}</div>
+    </button>
+  `).join("");
+  selectSign("Aries");
+}
+
+renderSigns();
+</script>
+</body>
+</html>
