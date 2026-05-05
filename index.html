@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chaotic Daily Oracle — Pull a Card for Your Situation</title>
-<meta name="description" content="Pull a free daily oracle card for love, money, baby daddy drama, healing era, boss mode & more. Your chaotic spiritual bestie is HERE. Free readings daily.">
+<meta name="description" content="Pull a FREE daily oracle card reading for love, money, baby daddy drama, healing era & boss mode. Your chaotic spiritual bestie is here. New reading every day — no signup needed.">
 <meta name="keywords" content="free oracle card reading, daily oracle cards, love reading, money manifestation, healing era, boss mode energy, spiritual guidance, tarot alternative">
 <meta property="og:title" content="Chaotic Daily Oracle — Pull a Card for Your Situation">
 <meta property="og:description" content="Your chaotic spiritual bestie. Pull a free oracle card for love, money, baby daddy drama & more.">
@@ -441,6 +441,75 @@
     font-family: 'Playfair Display', serif;
     font-weight: 400;
   }
+  .recent-readings {
+    max-width: 640px;
+    margin: 1.5rem auto 0;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: left;
+  }
+  .recent-readings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .recent-readings h3 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 1.15rem;
+  }
+  .clear-history-btn {
+    background: transparent;
+    border: 1px solid rgba(200,151,58,0.35);
+    color: var(--gold);
+    border-radius: 999px;
+    padding: 0.45rem 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  .clear-history-btn:hover { background: rgba(200,151,58,0.12); }
+  .recent-list {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .recent-item {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 1rem;
+    background: rgba(0,0,0,0.12);
+  }
+  .recent-meta {
+    color: var(--gold);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .recent-card-word {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+  }
+  .recent-message {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.84rem;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  .recent-empty {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
 
   /* AD BANNER */
   .ad-banner {
@@ -567,43 +636,6 @@
     margin-bottom: 2rem;
     font-weight: 300;
   }
-  .email-row {
-    display: flex;
-    gap: 0.5rem;
-    max-width: 420px;
-    margin: 0 auto;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .email-row input {
-    flex: 1;
-    min-width: 200px;
-    padding: 0.75rem 1.25rem;
-    border-radius: 2rem;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.07);
-    color: white;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    outline: none;
-  }
-  .email-row input::placeholder { color: rgba(255,255,255,0.35); }
-  .email-row button {
-    background: var(--gold);
-    color: var(--ink);
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 2rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-  .email-row button:hover { opacity: 0.85; }
-
   /* SOCIAL PROOF */
   .testimonials {
     display: grid;
@@ -698,6 +730,7 @@
   <ul class="nav-links">
     <li><a href="#pull">Pull a Card</a></li>
     <li><a href="zodiac.html">Zodiac</a></li>
+    <li><a href="moon.html">Moon</a></li>
     <li><a href="#readings">Readings</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="#about">About</a></li>
@@ -811,6 +844,28 @@
     <h3 id="detailTitle">Full Reading</h3>
     <p id="detailText">Your reading goes deeper here...</p>
     <p class="reading-affirmation" id="detailAffirm">"I am open to receiving."</p>
+  </div>
+
+  <div id="viralPanel" style="display:none;max-width:460px;margin:1.5rem auto;background:rgba(19,10,42,0.7);border:1px solid rgba(155,127,212,0.25);border-radius:16px;padding:1.5rem;">
+    <p style="font-size:.65rem;letter-spacing:.2em;color:#9B7FD4;text-transform:uppercase;margin-bottom:1rem">✦ Share Your Reading</p>
+
+    <p style="font-size:.8rem;color:rgba(232,223,200,0.5);font-family:'Jost',sans-serif;margin-bottom:.75rem">TikTok caption:</p>
+    <div id="tiktokCaption" style="background:rgba(0,0,0,0.3);border-radius:8px;padding:1rem;font-size:.82rem;color:rgba(232,223,200,0.8);line-height:1.7;font-family:'Jost',sans-serif;margin-bottom:.75rem">
+    </div>
+
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+      <button onclick="copyTikTok()" style="flex:1">Copy TikTok Caption</button>
+      <button onclick="copyPinterest()" style="flex:1">Copy Pinterest Text</button>
+      <button onclick="shareX()" style="flex:1">Post to X/Twitter</button>
+    </div>
+  </div>
+
+  <div class="recent-readings" id="recentReadingsPanel">
+    <div class="recent-readings-header">
+      <h3>Your Recent Readings</h3>
+      <button class="clear-history-btn" type="button" onclick="clearReadingHistory()">Clear History</button>
+    </div>
+    <div class="recent-list" id="recentReadingsList"></div>
   </div>
 </section>
 
@@ -936,16 +991,6 @@
   </div>
 </section>
 
-<!-- CTA STRIP -->
-<section class="cta-strip">
-  <h2>Get Your Daily Reading Delivered</h2>
-  <p>Subscribe for your free daily oracle drop. No spam, just good vibes and guidance.</p>
-  <div class="email-row">
-    <input type="email" placeholder="your@email.com">
-    <button>Subscribe Free</button>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <footer>
   <p class="footer-logo">Chaotic Daily Oracle</p>
@@ -953,6 +998,7 @@
     <a href="index.html">Home</a>
     <a href="#pull">Pull a Card</a>
     <a href="zodiac.html">Zodiac</a>
+    <a href="moon.html">Moon</a>
     <a href="#about">About</a>
     <a href="#faq">FAQ</a>
     <a href="#">Privacy Policy</a>
@@ -1011,15 +1057,19 @@ const cards = {
 };
 
 let currentTopic = null;
+let topicLabel = null;
 let isFlipped = false;
 let currentCard = null;
+const readingHistoryKey = 'chaoticDailyOracleRecentReadings';
 
 function selectSituation(topic, label, icon) {
   currentTopic = topic;
+  topicLabel = label;
   isFlipped = false;
   const inner = document.getElementById('cardInner');
   inner.classList.remove('flipped');
   document.getElementById('readingDetail').classList.remove('visible');
+  document.getElementById('viralPanel').style.display = 'none';
 
   const badge = document.getElementById('topicBadge');
   badge.textContent = icon + ' ' + label;
@@ -1059,6 +1109,9 @@ function flipCard() {
     document.getElementById('detailText').textContent = currentCard.msg + ' This card is calling you to sit with this energy today. Notice where it shows up in your life, and what feelings it brings up.';
     document.getElementById('detailAffirm').textContent = currentCard.affirmation;
     document.getElementById('readingDetail').classList.add('visible');
+    document.getElementById('tiktokCaption').textContent = `POV: the oracle pulled "${currentCard.word}" for my ${topicLabel} situation 🔮✨\n\nMessage: "${currentCard.msg.slice(0,80)}..."\n\nPull yours FREE 👇\n#oraclecards #${currentTopic}era #dailyoracle #spiritualtiktok #mamimayhem #chaoticdailyoracle`;
+    document.getElementById('viralPanel').style.display = 'block';
+    saveReadingToHistory();
   }, 600);
 }
 
@@ -1066,10 +1119,11 @@ function resetCard() {
   isFlipped = false;
   document.getElementById('cardInner').classList.remove('flipped');
   document.getElementById('readingDetail').classList.remove('visible');
+  document.getElementById('viralPanel').style.display = 'none';
   if (currentTopic) {
     const deck = cards[currentTopic] || cards.clarity;
     currentCard = deck[Math.floor(Math.random() * deck.length)];
-    const label = document.getElementById('topicBadge').textContent.slice(2);
+    const label = topicLabel || document.getElementById('topicBadge').textContent.slice(2);
     const bg = document.getElementById('cardBg');
     bg.style.background = `linear-gradient(155deg, ${currentCard.color1}, ${currentCard.color2})`;
     document.getElementById('cardCategory').textContent = label.toUpperCase();
@@ -1088,6 +1142,86 @@ function resetCard() {
 function toggleFaq(el) {
   el.classList.toggle('open');
 }
+
+function getReadingHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(readingHistoryKey)) || [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveReadingToHistory() {
+  const history = getReadingHistory();
+  const reading = {
+    date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }),
+    topic: topicLabel || currentTopic || 'Oracle',
+    word: currentCard.word,
+    message: currentCard.msg
+  };
+  localStorage.setItem(readingHistoryKey, JSON.stringify([reading, ...history].slice(0, 5)));
+  renderReadingHistory();
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[char]));
+}
+
+function renderReadingHistory() {
+  const list = document.getElementById('recentReadingsList');
+  const history = getReadingHistory();
+  if (!history.length) {
+    list.innerHTML = '<p class="recent-empty">Your last five pulls will appear here after you reveal a card.</p>';
+    return;
+  }
+  list.innerHTML = history.map(reading => `
+    <article class="recent-item">
+      <p class="recent-meta">${escapeHtml(reading.date)} · ${escapeHtml(reading.topic)}</p>
+      <p class="recent-card-word">${escapeHtml(reading.word)}</p>
+      <p class="recent-message">${escapeHtml(reading.message)}</p>
+    </article>
+  `).join('');
+}
+
+function clearReadingHistory() {
+  localStorage.removeItem(readingHistoryKey);
+  renderReadingHistory();
+  showToast('Reading history cleared.');
+}
+
+function showToast(message) {
+  const existingToast = document.getElementById('shareToast');
+  if (existingToast) existingToast.remove();
+  const toast = document.createElement('div');
+  toast.id = 'shareToast';
+  toast.textContent = message;
+  toast.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1A1209;color:#F0D9A8;border:1px solid rgba(200,151,58,0.35);border-radius:999px;padding:.75rem 1.1rem;font-size:.82rem;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,.25);';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2200);
+}
+
+function copyTikTok(){
+  navigator.clipboard.writeText(document.getElementById('tiktokCaption').textContent);
+  showToast('TikTok caption copied!');
+}
+
+function copyPinterest(){
+  const text = `Oracle card reading: ${currentCard.word}\n\n${currentCard.msg}\n\nPull yours free at chaotic-daily-oracle.vercel.app`;
+  navigator.clipboard.writeText(text);
+  showToast('Pinterest text copied!');
+}
+
+function shareX(){
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent('My oracle card today: "'+currentCard.word+'" ✦ Pull yours free at chaotic-daily-oracle.vercel.app')}`)
+}
+
+renderReadingHistory();
 </script>
 </body>
 </html>

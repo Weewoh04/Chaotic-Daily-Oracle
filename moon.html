@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Moon Phase Reading - Chaotic Daily Oracle</title>
+<meta name="description" content="Check today's moon phase and get a free daily moon oracle reading with a focus, ritual prompt, affirmation, and real talk guidance.">
+<meta name="keywords" content="daily moon phase reading, moon oracle, moon phase today, lunar reading, free moon reading">
+<meta property="og:title" content="Daily Moon Phase Reading - Chaotic Daily Oracle">
+<meta property="og:description" content="Today's moon phase, translated into a chaotic little oracle reading.">
+<meta property="og:image" content="https://chaotic-daily-oracle.vercel.app/og-image.png">
+<meta property="og:url" content="https://chaotic-daily-oracle.vercel.app/moon.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF6EF;
+    --ink: #1A1209;
+    --gold: #C8973A;
+    --gold-light: #F0D9A8;
+    --rose: #C4516B;
+    --rose-light: #F4D0D8;
+    --sage: #4A7C65;
+    --sage-light: #C8DDD4;
+    --plum: #6B3D7A;
+    --sky-light: #C8DFF0;
+    --border: rgba(26,18,9,0.12);
+    --shadow: 0 14px 40px rgba(26,18,9,0.12);
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  nav {
+    background: var(--ink);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { font-style: italic; color: var(--gold-light); }
+  .nav-links {
+    display: flex;
+    gap: 1.1rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+  .nav-shop {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 0.42rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .hero {
+    min-height: calc(100vh - 64px);
+    display: grid;
+    align-items: center;
+    padding: 4rem 2rem 3rem;
+    background:
+      radial-gradient(circle at 20% 24%, rgba(200,151,58,0.18), transparent 28%),
+      radial-gradient(circle at 78% 30%, rgba(107,61,122,0.17), transparent 34%),
+      linear-gradient(135deg, #FAF6EF 0%, #EEE3D4 52%, #DCEBE5 100%);
+    overflow: hidden;
+  }
+  .hero-inner {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 3rem;
+    align-items: center;
+  }
+  .eyebrow {
+    color: var(--gold);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.7rem, 7vw, 5.2rem);
+    line-height: 0.98;
+    max-width: 720px;
+  }
+  h1 em { color: var(--plum); font-style: italic; }
+  .hero-sub {
+    color: rgba(26,18,9,0.64);
+    font-size: 1.08rem;
+    line-height: 1.65;
+    font-weight: 300;
+    max-width: 590px;
+    margin-top: 1.2rem;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  .btn {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.9rem 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.18s, opacity 0.18s;
+  }
+  .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+  .btn-primary { background: var(--ink); color: white; }
+  .btn-gold { background: var(--gold); color: var(--ink); }
+  .moon-orbit {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(26,18,9,0.12);
+    background:
+      repeating-conic-gradient(from 0deg, rgba(26,18,9,0.045) 0 1deg, transparent 1deg 22.5deg),
+      radial-gradient(circle, rgba(255,255,255,0.9) 0 28%, rgba(240,217,168,0.55) 29% 31%, rgba(255,255,255,0.72) 32% 62%, rgba(26,18,9,0.04) 63% 100%);
+    box-shadow: var(--shadow);
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+  .moon-visual {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: #F8E8B8;
+    box-shadow: inset -22px 0 38px rgba(26,18,9,0.14), 0 0 45px rgba(240,217,168,0.75);
+    position: relative;
+    overflow: hidden;
+  }
+  .moon-shadow {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(26,18,9,0.86);
+    transform: translateX(var(--shadow-x, -80px));
+  }
+  .moon-label {
+    position: absolute;
+    bottom: 2.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(26,18,9,0.58);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .section {
+    width: min(1080px, 100%);
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .section-label {
+    color: var(--gold);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    text-align: center;
+    color: rgba(26,18,9,0.56);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 640px;
+    margin: 0 auto 2rem;
+  }
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.85rem;
+  }
+  .phase-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    padding: 1rem;
+    min-height: 126px;
+    text-align: left;
+    box-shadow: 0 8px 24px rgba(26,18,9,0.05);
+  }
+  .phase-card.active {
+    border-color: rgba(200,151,58,0.75);
+    box-shadow: var(--shadow);
+  }
+  .phase-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--ink) 0 45%, var(--gold-light) 45% 100%);
+    margin-bottom: 0.6rem;
+  }
+  .phase-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.08rem;
+    margin-bottom: 0.22rem;
+  }
+  .phase-card p {
+    color: rgba(26,18,9,0.56);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+  .reading-stage {
+    background: var(--ink);
+    color: white;
+    padding: 4.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .reading-stage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 18% 30%, rgba(107,61,122,0.32), transparent 32%),
+      radial-gradient(circle at 78% 66%, rgba(200,151,58,0.16), transparent 34%);
+    pointer-events: none;
+  }
+  .reading-wrap {
+    position: relative;
+    width: min(980px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr);
+    gap: 2.2rem;
+    align-items: center;
+  }
+  .moon-card {
+    min-height: 420px;
+    border-radius: 8px;
+    border: 2px solid rgba(200,151,58,0.45);
+    background: linear-gradient(155deg, #201634, #123B3E);
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 70px rgba(0,0,0,0.28);
+  }
+  .card-frame {
+    flex: 1;
+    border: 1px solid rgba(240,217,168,0.32);
+    border-radius: 6px;
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-kicker {
+    color: var(--gold-light);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .card-phase {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 2.1rem;
+    line-height: 1.1;
+    margin-top: 0.8rem;
+  }
+  .card-word {
+    margin-top: auto;
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 1.5rem;
+    line-height: 1.15;
+  }
+  .card-date {
+    margin-top: 1rem;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .reading-panel {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.045);
+    padding: 2rem;
+  }
+  .reading-panel h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.35rem);
+    line-height: 1.05;
+    margin-bottom: 0.85rem;
+  }
+  .reading-panel h2 em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+  .reading-text {
+    color: rgba(255,255,255,0.72);
+    font-size: 1rem;
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 620px;
+  }
+  .reading-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+    margin: 1.5rem 0;
+  }
+  .meta-box {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 0.95rem;
+    background: rgba(255,255,255,0.04);
+  }
+  .meta-label {
+    color: var(--gold);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .meta-value {
+    color: rgba(255,255,255,0.82);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+  .affirmation {
+    color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.6;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.2rem;
+  }
+  .learn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .learn-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.35rem;
+  }
+  .learn-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.18rem;
+    margin-bottom: 0.55rem;
+  }
+  .learn-card p {
+    color: rgba(26,18,9,0.62);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 1.45rem;
+    margin-bottom: 1rem;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.3rem;
+    margin-bottom: 1.4rem;
+  }
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    nav { padding: 0.9rem 1rem; gap: 1rem; }
+    .hero { min-height: auto; }
+    .hero-inner, .reading-wrap { grid-template-columns: 1fr; }
+    .moon-orbit { max-width: 330px; margin: 0 auto; }
+    .reading-meta { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .hero, .section, .reading-stage { padding-left: 1rem; padding-right: 1rem; }
+    .reading-panel { padding: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Daily Moon Phase Reading",
+  "description": "A free daily moon phase oracle reading based on today's lunar energy.",
+  "url": "https://chaotic-daily-oracle.vercel.app/moon.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Chaotic Daily Oracle",
+    "url": "https://chaotic-daily-oracle.vercel.app/"
+  }
+}
+</script>
+
+<nav>
+  <a class="nav-logo" href="index.html">Chaotic <span>Daily</span> Oracle</a>
+  <ul class="nav-links">
+    <li><a href="index.html#pull">Pull a Card</a></li>
+    <li><a href="zodiac.html">Zodiac</a></li>
+    <li><a class="active" href="moon.html">Moon</a></li>
+    <li><a href="index.html#readings">Readings</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+  </ul>
+  <a href="https://mamimayhem.com" class="nav-shop">Shop Mami Mayhem</a>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow">Daily moon oracle</p>
+        <h1>Today's moon phase has a <em>message</em> for you.</h1>
+        <p class="hero-sub">Check the lunar energy for today and get a moon-tied oracle reading: what to notice, what to release, what to call in, and what not to text just because the vibes got loud.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#today-reading">Read Today's Moon</a>
+          <a class="btn btn-gold" href="zodiac.html">Zodiac Pulls</a>
+        </div>
+      </div>
+      <div class="moon-orbit" aria-hidden="true">
+        <div class="moon-visual"><div class="moon-shadow" id="moonShadow"></div></div>
+        <div class="moon-label" id="heroMoonLabel">Moon phase loading</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reading-stage" id="today-reading">
+    <div class="reading-wrap">
+      <div class="moon-card">
+        <div class="card-frame">
+          <p class="card-kicker">Today's Moon Card</p>
+          <p class="card-phase" id="cardPhase">Moon Phase</p>
+          <p class="card-word" id="cardWord">Lunar Message</p>
+          <p class="card-date" id="cardDate">Daily pull</p>
+        </div>
+      </div>
+      <div class="reading-panel">
+        <p class="eyebrow">Your lunar reading</p>
+        <h2 id="readingTitle">Today's moon says <em>listen closely</em></h2>
+        <p class="reading-text" id="readingText"></p>
+        <div class="reading-meta">
+          <div class="meta-box">
+            <p class="meta-label">Moon Focus</p>
+            <p class="meta-value" id="focusText"></p>
+          </div>
+          <div class="meta-box">
+            <p class="meta-label">Tiny Ritual</p>
+            <p class="meta-value" id="ritualText"></p>
+          </div>
+        </div>
+        <p class="affirmation" id="affirmationText"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">Lunar cycle</p>
+    <h2 class="section-title">The Eight Moon Phases</h2>
+    <p class="section-sub">Your reading follows the moon's current phase. New moons start the story, full moons reveal it, and the waning phases help you stop carrying what is not yours.</p>
+    <div class="phase-grid" id="phaseGrid"></div>
+  </section>
+
+  <section class="section">
+    <p class="section-label">Use the moon without overthinking it</p>
+    <h2 class="section-title">A Simple Daily Moon Ritual</h2>
+    <div class="learn-grid">
+      <div class="learn-card">
+        <h3>Check the phase</h3>
+        <p>Let the phase set the tone. New moon energy is different from full moon energy, and your next move can match the moment.</p>
+      </div>
+      <div class="learn-card">
+        <h3>Take one action</h3>
+        <p>The reading gives you one small ritual. Do that before pulling three more cards and creating a spiritual spreadsheet.</p>
+      </div>
+      <div class="learn-card">
+        <h3>Track what repeats</h3>
+        <p>If the same theme keeps showing up across moon phases, that is the message asking to be lived, not just admired.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p class="footer-logo">Chaotic Daily Oracle</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#pull">Pull a Card</a>
+    <a href="zodiac.html">Zodiac</a>
+    <a href="moon.html">Moon</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="https://mami-mayhem.myshopify.com">Mami Mayhem Shop</a>
+  </div>
+  <p>&copy; 2025 Chaotic Daily Oracle - Part of the Mami Mayhem universe</p>
+  <p style="margin-top:0.5rem;font-size:0.7rem;opacity:0.4;">For entertainment purposes. Not a substitute for professional advice.</p>
+</footer>
+
+<script>
+const phases = [
+  {
+    name: "New Moon",
+    range: "Begin again",
+    word: "Fresh Intentions",
+    message: "This moon is quiet on purpose. Today is not asking for a grand reveal; it is asking you to plant one honest intention and stop announcing it before it has roots.",
+    focus: "Begin privately. Protect the early version of the dream.",
+    ritual: "Write one intention in a note, fold it, and place it somewhere you will see tomorrow.",
+    affirmation: "I begin again with clarity, softness, and power."
+  },
+  {
+    name: "Waxing Crescent",
+    range: "First brave step",
+    word: "Tiny Momentum",
+    message: "The energy is building, but it still needs care. Do not demand overnight transformation from a seedling. Take the small step and let it count.",
+    focus: "Choose progress that is easy enough to repeat.",
+    ritual: "Do one 10-minute action that supports the thing you want.",
+    affirmation: "Small moves are still sacred moves."
+  },
+  {
+    name: "First Quarter",
+    range: "Decision point",
+    word: "Choose The Move",
+    message: "The moon is applying pressure because your next level needs a decision. You can keep debating, or you can pick the path that makes your future self exhale.",
+    focus: "Act through the friction instead of waiting for fear to vanish.",
+    ritual: "Name one obstacle and one direct action you can take today.",
+    affirmation: "I can choose before everything feels perfect."
+  },
+  {
+    name: "Waxing Gibbous",
+    range: "Refine the plan",
+    word: "Almost Ready",
+    message: "You are close, but close does not mean finished. Today favors editing, practicing, asking better questions, and tightening the details without picking yourself apart.",
+    focus: "Refine without turning improvement into self-criticism.",
+    ritual: "Polish one thing that already exists instead of starting a new thing.",
+    affirmation: "I improve with patience and trust my becoming."
+  },
+  {
+    name: "Full Moon",
+    range: "Reveal and release",
+    word: "Too Loud To Ignore",
+    message: "The full moon puts a spotlight on what has been hiding in plain sight. Celebrate what is working, but be honest about what is draining you. The truth is not trying to ruin your night; it is trying to free you.",
+    focus: "See clearly, celebrate honestly, release dramatically if needed.",
+    ritual: "Write down one win and one thing you are done carrying.",
+    affirmation: "I can honor the truth and still honor myself."
+  },
+  {
+    name: "Waning Gibbous",
+    range: "Integrate the lesson",
+    word: "Let It Land",
+    message: "After the reveal comes the meaning. Do not rush past what you just learned. Today asks you to digest the lesson before turning it into advice for everyone else.",
+    focus: "Process what happened without making it your whole identity.",
+    ritual: "Journal three sentences: what I learned, what I need, what changes now.",
+    affirmation: "I integrate my lessons with grace."
+  },
+  {
+    name: "Last Quarter",
+    range: "Cut the cord",
+    word: "Clean Break",
+    message: "This moon is for release with a backbone. If something keeps costing you peace, it may be time to stop negotiating with it in your head.",
+    focus: "Choose closure through action, not just intention.",
+    ritual: "Delete, donate, archive, mute, or decline one thing that keeps reopening the loop.",
+    affirmation: "I release what has expired without apologizing for my growth."
+  },
+  {
+    name: "Waning Crescent",
+    range: "Rest and restore",
+    word: "Sacred Low Battery",
+    message: "Your energy is asking for restoration, not another productivity era. Today is for ending gently, sleeping more, and letting silence do some of the healing.",
+    focus: "Rest before the reset arrives.",
+    ritual: "Put one thing down early tonight and let yourself be unavailable.",
+    affirmation: "Rest is part of my magic, not a break from it."
+  }
+];
+
+function getMoonPhase() {
+  const now = new Date();
+  const knownNewMoon = Date.UTC(2000, 0, 6, 18, 14);
+  const synodicMonth = 29.530588853;
+  const daysSince = (now.getTime() - knownNewMoon) / 86400000;
+  const age = ((daysSince % synodicMonth) + synodicMonth) % synodicMonth;
+  const index = Math.floor(((age / synodicMonth) * 8) + 0.5) % 8;
+  const illumination = Math.round((1 - Math.cos((2 * Math.PI * age) / synodicMonth)) / 2 * 100);
+  return { age, index, illumination };
+}
+
+function formatToday() {
+  return new Intl.DateTimeFormat(undefined, {
+    weekday: "long",
+    month: "long",
+    day: "numeric"
+  }).format(new Date());
+}
+
+function shadowPosition(phaseIndex) {
+  const positions = ["-3px", "-72px", "-112px", "-150px", "-220px", "150px", "112px", "72px"];
+  return positions[phaseIndex] || "-3px";
+}
+
+function renderPhaseGrid(activeIndex) {
+  const grid = document.getElementById("phaseGrid");
+  grid.innerHTML = phases.map((phase, index) => `
+    <div class="phase-card ${index === activeIndex ? "active" : ""}">
+      <div class="phase-mark" style="background:${index < 4 ? "linear-gradient(90deg, var(--ink) 0 45%, var(--gold-light) 45% 100%)" : "linear-gradient(90deg, var(--gold-light) 0 55%, var(--ink) 55% 100%)"}"></div>
+      <h3>${phase.name}</h3>
+      <p>${phase.range}</p>
+    </div>
+  `).join("");
+}
+
+function renderMoonReading() {
+  const moon = getMoonPhase();
+  const phase = phases[moon.index];
+  document.documentElement.style.setProperty("--shadow-x", shadowPosition(moon.index));
+  document.getElementById("heroMoonLabel").textContent = `${phase.name} - ${moon.illumination}% lit`;
+  document.getElementById("cardPhase").textContent = phase.name;
+  document.getElementById("cardWord").textContent = phase.word;
+  document.getElementById("cardDate").textContent = `${formatToday()} - ${moon.illumination}% illuminated`;
+  document.getElementById("readingTitle").innerHTML = `The ${phase.name.toLowerCase()} says <em>${phase.word}</em>`;
+  document.getElementById("readingText").textContent = phase.message;
+  document.getElementById("focusText").textContent = phase.focus;
+  document.getElementById("ritualText").textContent = phase.ritual;
+  document.getElementById("affirmationText").textContent = `"${phase.affirmation}"`;
+  renderPhaseGrid(moon.index);
+}
+
+renderMoonReading();
+</script>
+</body>
+</html>
