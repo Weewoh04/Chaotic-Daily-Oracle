@@ -1,263 +1,1082 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chaotic Daily Oracle - Daily Tarot Card Generator</title>
-    <meta name="description" content="Get your daily chaotic oracle card pull for feelings, spirals, and main character energy. Funny, witchy, empowering tarot readings.">
-    <meta name="keywords" content="tarot, oracle, daily card, chaotic divine feminine, witchy readings, tarot generator">
-    <link rel="stylesheet" href="styles.css">
-    <!-- Google Analytics: Insert your GA tracking code here -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_TRACKING_ID');
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chaotic Daily Oracle — Pull a Card for Your Situation</title>
+<meta name="description" content="Pull a free daily oracle card for love, money, baby daddy drama, healing era, boss mode & more. Your chaotic spiritual bestie is HERE. Free readings daily.">
+<meta name="keywords" content="free oracle card reading, daily oracle cards, love reading, money manifestation, healing era, boss mode energy, spiritual guidance, tarot alternative">
+<meta property="og:title" content="Chaotic Daily Oracle — Pull a Card for Your Situation">
+<meta property="og:description" content="Your chaotic spiritual bestie. Pull a free oracle card for love, money, baby daddy drama & more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF6EF;
+    --ink: #1A1209;
+    --gold: #C8973A;
+    --gold-light: #F0D9A8;
+    --rose: #C4516B;
+    --rose-light: #F4D0D8;
+    --sage: #4A7C65;
+    --sage-light: #C8DDD4;
+    --plum: #6B3D7A;
+    --plum-light: #DBC8E2;
+    --sky: #2E6B99;
+    --sky-light: #C8DFF0;
+    --amber: #B85C1A;
+    --amber-light: #F0D5BA;
+    --border: rgba(26,18,9,0.12);
+    --shadow: 0 8px 32px rgba(26,18,9,0.12);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--ink);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+  .nav-logo span { font-style: italic; color: var(--gold-light); }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-shop {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .nav-shop:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 5rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse, rgba(200,151,58,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--rose);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: rgba(26,18,9,0.6);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .hero-scroll-hint {
+    font-size: 0.78rem;
+    color: rgba(26,18,9,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+  }
+
+  /* SITUATION GRID */
+  .section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+    text-align: center;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    text-align: center;
+    color: rgba(26,18,9,0.55);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .situation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .sit-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.4rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    background: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .sit-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+    border-radius: 16px;
+  }
+  .sit-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+  .sit-card:hover::before { opacity: 1; }
+  .sit-card:active { transform: scale(0.97); }
+
+  .sit-card.love { border-color: var(--rose-light); }
+  .sit-card.love::before { background: linear-gradient(135deg, var(--rose-light), transparent); }
+  .sit-card.money { border-color: var(--gold-light); }
+  .sit-card.money::before { background: linear-gradient(135deg, var(--gold-light), transparent); }
+  .sit-card.drama { border-color: var(--amber-light); }
+  .sit-card.drama::before { background: linear-gradient(135deg, var(--amber-light), transparent); }
+  .sit-card.healing { border-color: var(--sage-light); }
+  .sit-card.healing::before { background: linear-gradient(135deg, var(--sage-light), transparent); }
+  .sit-card.boss { border-color: var(--plum-light); }
+  .sit-card.boss::before { background: linear-gradient(135deg, var(--plum-light), transparent); }
+  .sit-card.clarity { border-color: var(--sky-light); }
+  .sit-card.clarity::before { background: linear-gradient(135deg, var(--sky-light), transparent); }
+
+  .sit-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    line-height: 1;
+  }
+  .sit-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.25rem;
+  }
+  .sit-desc {
+    font-size: 0.72rem;
+    color: rgba(26,18,9,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* CARD FLIP SECTION */
+  .oracle-stage {
+    background: var(--ink);
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .oracle-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(107,61,122,0.25), transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(200,151,58,0.15), transparent 60%);
+    pointer-events: none;
+  }
+  .oracle-stage-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+  .oracle-stage-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+  .oracle-stage-sub {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.95rem;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .selected-topic {
+    display: inline-block;
+    background: rgba(200,151,58,0.15);
+    border: 1px solid rgba(200,151,58,0.3);
+    color: var(--gold);
+    padding: 0.35rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+
+  .card-container {
+    perspective: 1000px;
+    width: 220px;
+    height: 340px;
+    margin: 0 auto 2rem;
+    cursor: pointer;
+  }
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  .card-inner.flipped { transform: rotateY(180deg); }
+
+  .card-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .card-back {
+    background: linear-gradient(145deg, #2A1F4A, #1A3D4A);
+    border: 2px solid rgba(200,151,58,0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  .card-back-pattern {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(200,151,58,0.2);
+    border-radius: 12px;
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(200,151,58,0.04) 6px, rgba(200,151,58,0.04) 7px),
+      repeating-linear-gradient(-45deg, transparent, transparent 6px, rgba(200,151,58,0.04) 6px, rgba(200,151,58,0.04) 7px);
+  }
+  .card-back-star {
+    font-size: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .card-back-text {
+    color: rgba(200,151,58,0.7);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-front {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.25rem;
+    border: 2px solid rgba(200,151,58,0.5);
+  }
+  .card-front-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    opacity: 0.95;
+  }
+  .card-front-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .card-title-line {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
+  }
+  .card-main-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: auto;
+  }
+  .card-divider {
+    width: 32px;
+    height: 1px;
+    margin: 0.75rem 0;
+    opacity: 0.4;
+  }
+  .card-message {
+    font-size: 0.75rem;
+    line-height: 1.55;
+    opacity: 0.9;
+    font-weight: 300;
+  }
+  .card-number {
+    font-size: 0.6rem;
+    opacity: 0.5;
+    letter-spacing: 0.1em;
+    margin-top: 0.75rem;
+  }
+
+  .pull-btn {
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    padding: 0.9rem 2.5rem;
+    border-radius: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    margin-top: 1rem;
+  }
+  .pull-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+  .pull-btn:active { transform: scale(0.97); }
+
+  .reading-detail {
+    max-width: 460px;
+    margin: 2rem auto 0;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    text-align: left;
+    display: none;
+  }
+  .reading-detail.visible { display: block; }
+  .reading-detail h3 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .reading-detail p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .reading-affirmation {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-style: italic;
+    color: var(--gold) !important;
+    font-size: 0.95rem !important;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+  }
+
+  /* AD BANNER */
+  .ad-banner {
+    background: #f5f0e8;
+    border: 1px dashed rgba(26,18,9,0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 728px;
+    color: rgba(26,18,9,0.35);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* CATEGORIES DEEP DIVE */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .feature-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    background: white;
+    transition: box-shadow 0.2s;
+  }
+  .feature-card:hover { box-shadow: var(--shadow); }
+  .feature-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .feature-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    margin-bottom: 0.4rem;
+  }
+  .feature-card p {
+    font-size: 0.85rem;
+    color: rgba(26,18,9,0.55);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .feature-tag {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 1rem;
+    font-weight: 500;
+  }
+
+  /* SEO CONTENT */
+  .seo-section {
+    background: white;
+    padding: 4rem 2rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .seo-section .section {
+    max-width: 760px;
+    padding: 0 2rem;
+  }
+  .seo-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  .seo-section p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(26,18,9,0.65);
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 0;
+    cursor: pointer;
+  }
+  .faq-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .faq-q::after { content: '+'; font-family: sans-serif; font-weight: 300; font-size: 1.3rem; color: var(--gold); flex-shrink: 0; }
+  .faq-item.open .faq-q::after { content: '−'; }
+  .faq-a {
+    font-size: 0.88rem;
+    color: rgba(26,18,9,0.6);
+    line-height: 1.7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding-top 0.2s;
+    font-weight: 300;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding-top: 0.75rem; }
+
+  /* NEWSLETTER / CTA */
+  .cta-strip {
+    background: var(--ink);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  .cta-strip h2 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  .cta-strip p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+  .email-row {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 420px;
+    margin: 0 auto;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .email-row input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.75rem 1.25rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.07);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+  }
+  .email-row input::placeholder { color: rgba(255,255,255,0.35); }
+  .email-row button {
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .email-row button:hover { opacity: 0.85; }
+
+  /* SOCIAL PROOF */
+  .testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 0;
+  }
+  .testi {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+  .testi-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .testi-text {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: rgba(26,18,9,0.7);
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 0.75rem;
+  }
+  .testi-name {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(26,18,9,0.4);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .schema-breadcrumb { display: none; }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .situation-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="nav-container">
-                <h1 class="nav-title">Chaotic Daily Oracle</h1>
-                <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#pull">Pull a Card</a></li>
-                    <li><a href="#readings">Readings</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
 
-    <main id="home">
-        <section class="hero">
-            <h1>Chaotic Daily Oracle</h1>
-            <p>A daily card pull for your feelings, your spiral, and your main character era.</p>
-            <button id="pull-card-btn" class="cta-button">Pull My Card</button>
-        </section>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Chaotic Daily Oracle",
+  "description": "Free daily oracle card readings for love, money, baby daddy drama, healing era, boss mode, and more.",
+  "url": "https://chaoticdailyoracle.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://chaoticdailyoracle.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Are these oracle card readings accurate?", "acceptedAnswer": { "@type": "Answer", "text": "Our oracle readings use intuitive AI channeling to reflect the energy around your situation. Think of it as your chaotic spiritual bestie telling you what you already know." } },
+    { "@type": "Question", "name": "How often can I pull a card?", "acceptedAnswer": { "@type": "Answer", "text": "Pull as many cards as you need, bestie. We recommend one per situation per day for the clearest guidance." } }
+  ]
+}
+</script>
 
-        <section class="card-of-day">
-            <h2>Card of the Day</h2>
-            <div class="daily-card-banner">
-                <div class="daily-card-content">
-                    <h3 id="daily-topic"></h3>
-                    <p id="daily-word"></p>
-                    <p id="daily-message"></p>
-                </div>
-                <div class="countdown">
-                    <p>Next card in <span id="countdown-timer"></span></p>
-                </div>
-            </div>
-        </section>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Chaotic <span>Daily</span> Oracle</div>
+  <ul class="nav-links">
+    <li><a href="#pull">Pull a Card</a></li>
+    <li><a href="#readings">Readings</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://mami-mayhem.myshopify.com" class="nav-shop">Shop Mami Mayhem ✦</a>
+</nav>
 
-        <section class="section" id="pull">
-            <p class="section-label">✦ Choose your situation ✦</p>
-            <h2 class="section-title">What do you need clarity on?</h2>
-            <p class="section-sub">Tap a topic and then pull your card for real-talk guidance</p>
-            <div class="situation-grid">
-                <div class="sit-card love">
-                    <span class="sit-icon">💋</span>
-                    <p class="sit-name">Love Era</p>
-                    <p class="sit-desc">Romance, attraction, and relationship energy</p>
-                </div>
-                <div class="sit-card money">
-                    <span class="sit-icon">💰</span>
-                    <p class="sit-name">Money Moves</p>
-                    <p class="sit-desc">Abundance, hustle, and financial instincts</p>
-                </div>
-                <div class="sit-card drama">
-                    <span class="sit-icon">🍵</span>
-                    <p class="sit-name">Baby Daddy Drama</p>
-                    <p class="sit-desc">Co-parenting, ex energy, and messy texts</p>
-                </div>
-                <div class="sit-card healing">
-                    <span class="sit-icon">🌿</span>
-                    <p class="sit-name">Healing Era</p>
-                    <p class="sit-desc">Self-care, boundaries, and emotional rebirth</p>
-                </div>
-                <div class="sit-card boss">
-                    <span class="sit-icon">👑</span>
-                    <p class="sit-name">Boss Mode</p>
-                    <p class="sit-desc">Career, confidence, and your power moves</p>
-                </div>
-                <div class="sit-card clarity">
-                    <span class="sit-icon">🔮</span>
-                    <p class="sit-name">Clarity & Decisions</p>
-                    <p class="sit-desc">The choice you keep replaying in your head</p>
-                </div>
-            </div>
-        </section>
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">✦ Free Daily Oracle Readings ✦</p>
+  <h1>Your Chaotic<br><em>Spiritual Bestie</em><br>Is Here for It</h1>
+  <p class="hero-sub">Pull a card for your love life, your money moves, your healing era, or that situation you keep thinking about at 2am.</p>
+  <p class="hero-scroll-hint">↓ Choose your situation below ↓</p>
+</section>
 
-        <!-- Ad placeholder above card result -->
-        <div class="ad-placeholder">
-            <!-- Google AdSense: Insert AdSense code here for banner ad above card -->
-            <p>Ad Placeholder - Above Card</p>
+<!-- AD SPACE TOP -->
+<div class="section" style="padding-top:0; padding-bottom:0;">
+  <div class="ad-banner">Advertisement — Your ad could be here</div>
+</div>
+
+<!-- SITUATION PICKER -->
+<section class="section" id="pull">
+  <p class="section-label">✦ Choose your situation ✦</p>
+  <h2 class="section-title">What Do You Need Clarity On?</h2>
+  <p class="section-sub">Tap a card to pull your reading</p>
+
+  <div class="situation-grid" id="sitGrid">
+    <div class="sit-card love" onclick="selectSituation('love','Love & Relationships','💋')">
+      <span class="sit-icon">💋</span>
+      <p class="sit-name">Love Era</p>
+      <p class="sit-desc">Romance & connection</p>
+    </div>
+    <div class="sit-card money" onclick="selectSituation('money','Money & Abundance','💰')">
+      <span class="sit-icon">💰</span>
+      <p class="sit-name">Money Moves</p>
+      <p class="sit-desc">Finances & manifestation</p>
+    </div>
+    <div class="sit-card drama" onclick="selectSituation('drama','Baby Daddy Drama','🍵')">
+      <span class="sit-icon">🍵</span>
+      <p class="sit-name">Baby Daddy Drama</p>
+      <p class="sit-desc">Co-parenting & exes</p>
+    </div>
+    <div class="sit-card healing" onclick="selectSituation('healing','Healing Era','🌿')">
+      <span class="sit-icon">🌿</span>
+      <p class="sit-name">Healing Era</p>
+      <p class="sit-desc">Growth & inner peace</p>
+    </div>
+    <div class="sit-card boss" onclick="selectSituation('boss','Boss Mode','👑')">
+      <span class="sit-icon">👑</span>
+      <p class="sit-name">Boss Mode</p>
+      <p class="sit-desc">Career & ambition</p>
+    </div>
+    <div class="sit-card clarity" onclick="selectSituation('clarity','Clarity & Decisions','🔮')">
+      <span class="sit-icon">🔮</span>
+      <p class="sit-name">Need Clarity</p>
+      <p class="sit-desc">Decisions & crossroads</p>
+    </div>
+    <div class="sit-card love" onclick="selectSituation('friendship','Friendship Drama','🗣️')">
+      <span class="sit-icon">🗣️</span>
+      <p class="sit-name">Friendship Chaos</p>
+      <p class="sit-desc">Loyalty & boundaries</p>
+    </div>
+    <div class="sit-card money" onclick="selectSituation('glow','Glow Up Season','✨')">
+      <span class="sit-icon">✨</span>
+      <p class="sit-name">Glow Up Season</p>
+      <p class="sit-desc">Confidence & reinvention</p>
+    </div>
+    <div class="sit-card healing" onclick="selectSituation('family','Family Situation','🏠')">
+      <span class="sit-icon">🏠</span>
+      <p class="sit-name">Family Business</p>
+      <p class="sit-desc">Home & family bonds</p>
+    </div>
+  </div>
+</section>
+
+<!-- ORACLE CARD STAGE -->
+<section class="oracle-stage" id="cardStage">
+  <p class="oracle-stage-label">✦ Your Reading ✦</p>
+  <h2 class="oracle-stage-title">Pull Your Card</h2>
+  <p class="oracle-stage-sub">Click the card to reveal your message</p>
+  <div id="topicBadge" class="selected-topic" style="display:none;"></div>
+
+  <div class="card-container" id="cardContainer" onclick="flipCard()">
+    <div class="card-inner" id="cardInner">
+      <div class="card-face card-back">
+        <div class="card-back-pattern"></div>
+        <span class="card-back-star">✦</span>
+        <p class="card-back-text">Tap to Reveal</p>
+      </div>
+      <div class="card-face card-front" id="cardFront">
+        <div class="card-front-bg" id="cardBg"></div>
+        <div class="card-front-content">
+          <p class="card-title-line" id="cardCategory">Love Era</p>
+          <h3 class="card-main-word" id="cardWord">Surrender</h3>
+          <hr class="card-divider" id="cardDivider">
+          <p class="card-message" id="cardMsg">Stop forcing what isn't flowing. The right energy is coming — but you have to release the grip first.</p>
+          <p class="card-number" id="cardNum">Card #12 of 44</p>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <section id="card-result" class="card-result hidden">
-            <div class="card-container">
-                <div class="card" id="card">
-                    <div class="card-front">
-                        <p>Click to reveal your card</p>
-                    </div>
-                    <div class="card-back hidden">
-                        <h2 id="card-title"></h2>
-                        <p id="card-message"></p>
-                        <div class="card-preview-meta">
-                            <h3>Today’s Vibe</h3>
-                            <p id="card-vibe"></p>
-                        </div>
-                        <button id="read-more-btn" class="action-button" type="button">Read More</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card-actions">
-                <button id="pull-again-btn" class="action-button">Pull Again</button>
-                <p id="share-text">Share this: "My chaotic oracle card today is [Card Title]. Check yours at ChaoticDailyOracle.com!"</p>
-            </div>
-            <div class="share-actions hidden" id="share-actions">
-                <button class="share-button" id="pinterest-share">Share on Pinterest</button>
-                <button class="share-button" id="copy-caption">Copy TikTok Caption</button>
-                <button class="share-button" id="copy-reading">Copy Reading</button>
-            </div>
-            <div class="toast hidden" id="copy-toast">Copied!</div>
-        </section>
+  <div>
+    <button class="pull-btn" onclick="resetCard()">🔀 Pull Again</button>
+  </div>
 
-        <section class="section history-section" id="recent-readings">
-            <p class="section-label">✦ Your Recent Readings ✦</p>
-            <div class="history-panel">
-                <div class="history-header">
-                    <h2>Your Recent Readings</h2>
-                    <button id="clear-history" class="action-button">Clear History</button>
-                </div>
-                <div id="history-list" class="history-list">
-                    <p class="history-empty">No recent readings yet. Pull a card to save your first one.</p>
-                </div>
-            </div>
-        </section>
+  <div class="reading-detail" id="readingDetail">
+    <h3 id="detailTitle">Full Reading</h3>
+    <p id="detailText">Your reading goes deeper here...</p>
+    <p class="reading-affirmation" id="detailAffirm">"I am open to receiving."</p>
+  </div>
+</section>
 
-        <!-- Ad placeholder below card result -->
-        <div class="ad-placeholder">
-            <!-- Google AdSense: Insert AdSense code here for banner ad below card -->
-            <p>Ad Placeholder - Below Card</p>
-        </div>
+<!-- AD SPACE MID -->
+<div class="section" style="padding-top:2rem;padding-bottom:0;">
+  <div class="ad-banner">Advertisement — 728×90 Banner Ad Space</div>
+</div>
 
-        <section class="section feature-section" id="readings">
-            <p class="section-label">✦ All readings ✦</p>
-            <h2 class="section-title">Every kind of chaos, covered</h2>
-            <p class="section-sub">Oracle guidance for love, money, boss mode, healing, drama, and glow-up energy</p>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon" style="background:#F4D0D8;">💋</div>
-                    <h3>Love &amp; Relationship Oracle</h3>
-                    <p>Daily guidance for romance, situationships, heartbreak, and manifesting the energy you need.</p>
-                    <span class="feature-tag" style="background:#F4D0D8;color:#C4516B;">Love Era</span>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon" style="background:#F0D9A8;">💰</div>
-                    <h3>Money &amp; Abundance Oracle</h3>
-                    <p>Readings for financial flow, hustle energy, cash decisions, and money mindset shifts.</p>
-                    <span class="feature-tag" style="background:#F0D9A8;color:#B85C1A;">Money Moves</span>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon" style="background:#F0D5BA;">🍵</div>
-                    <h3>Baby Daddy Drama Oracle</h3>
-                    <p>Co-parenting chaos, ex energy, and emotional boundaries — the oracle gets real.</p>
-                    <span class="feature-tag" style="background:#F0D5BA;color:#B85C1A;">Drama</span>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon" style="background:#C8DDD4;">🌿</div>
-                    <h3>Healing Era Oracle</h3>
-                    <p>Readings for emotional recovery, self-work, and becoming the version of you you deserve.</p>
-                    <span class="feature-tag" style="background:#C8DDD4;color:#4A7C65;">Healing Era</span>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon" style="background:#DBC8E2;">👑</div>
-                    <h3>Boss Mode Career Oracle</h3>
-                    <p>Career moves, confidence, and the kind of energy that says “I’m ready” to the world.</p>
-                    <span class="feature-tag" style="background:#DBC8E2;color:#6B3D7A;">Boss Mode</span>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon" style="background:#C8DFF0;">✨</div>
-                    <h3>Glow Up &amp; Confidence Oracle</h3>
-                    <p>Manifest your glow-up, build inner light, and own your main character era.</p>
-                    <span class="feature-tag" style="background:#C8DFF0;color:#2E6B99;">Glow Up</span>
-                </div>
-            </div>
-        </section>
+<!-- FEATURES / CATEGORIES -->
+<section class="section" id="readings">
+  <p class="section-label">✦ All Readings ✦</p>
+  <h2 class="section-title">Every Kind of Chaos, Covered</h2>
+  <p class="section-sub">Oracle guidance for every season of your life</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#F4D0D8;">💋</div>
+      <h3>Love &amp; Relationship Oracle</h3>
+      <p>Free oracle card readings for love, romance, situationships, heartbreak, and new beginnings. Know if they're really the one — or just a lesson.</p>
+      <span class="feature-tag" style="background:var(--rose-light);color:var(--rose);">Love Era</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#F0D9A8;">💰</div>
+      <h3>Money Manifestation Oracle</h3>
+      <p>Daily oracle guidance for financial decisions, abundance blocks, money manifestation, and knowing when to invest vs. wait.</p>
+      <span class="feature-tag" style="background:var(--gold-light);color:var(--amber);">Money Moves</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#F0D5BA;">🍵</div>
+      <h3>Co-Parenting &amp; Drama Oracle</h3>
+      <p>Baby daddy drama, co-parenting chaos, and boundary-setting readings. The oracle sees it all and won't hold back.</p>
+      <span class="feature-tag" style="background:var(--amber-light);color:var(--amber);">Baby Daddy Drama</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#C8DDD4;">🌿</div>
+      <h3>Healing Era Oracle</h3>
+      <p>Shadow work, emotional healing, and inner child readings for women doing the deep work and choosing themselves first.</p>
+      <span class="feature-tag" style="background:var(--sage-light);color:var(--sage);">Healing Era</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#DBC8E2;">👑</div>
+      <h3>Boss Mode Career Oracle</h3>
+      <p>Entrepreneurship, career moves, side hustles, and knowing when to quit your job and bet on yourself. The oracle gives you the nudge.</p>
+      <span class="feature-tag" style="background:var(--plum-light);color:var(--plum);">Boss Mode</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon" style="background:#C8DFF0;">✨</div>
+      <h3>Glow Up &amp; Confidence Oracle</h3>
+      <p>Reinvention readings for women in their transformation era. Whether it's a rebrand, body, or mindset — your glow up is confirmed.</p>
+      <span class="feature-tag" style="background:var(--sky-light);color:var(--sky);">Glow Up Season</span>
+    </div>
+  </div>
+</section>
 
-        <section class="section testimonials-section">
-            <p class="section-label">✦ The people have spoken ✦</p>
-            <h2 class="section-title">Girlies are obsessed</h2>
-            <div class="testimonials">
-                <div class="testi">
-                    <div class="testi-stars">★★★★★</div>
-                    <p class="testi-text">"Pulled a card for my situationship and the message literally made me put my phone DOWN. How did it know??"</p>
-                    <p class="testi-name">@britneyreads</p>
-                </div>
-                <div class="testi">
-                    <div class="testi-stars">★★★★★</div>
-                    <p class="testi-text">"The baby daddy drama reading had me crying in my car. Felt so seen. I pull one every single morning now."</p>
-                    <p class="testi-name">@mamimayhem_fan</p>
-                </div>
-                <div class="testi">
-                    <div class="testi-stars">★★★★★</div>
-                    <p class="testi-text">"Finally an oracle that doesn't talk to me like a yoga instructor. Chaotic Daily Oracle gets the assignment."</p>
-                    <p class="testi-name">@xo_celesteee</p>
-                </div>
-            </div>
-        </section>
+<!-- TESTIMONIALS -->
+<section class="section" style="padding-top:0;">
+  <p class="section-label">✦ The People Have Spoken ✦</p>
+  <h2 class="section-title" style="margin-bottom:1.5rem;">Girlies Are Obsessed</h2>
+  <div class="testimonials">
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Pulled a card for my situationship and the message literally made me put my phone DOWN. How did it know??"</p>
+      <p class="testi-name">@britneyreads</p>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The baby daddy drama reading had me crying in my car. Felt so seen. I pull one every single morning now."</p>
+      <p class="testi-name">@mamimayhem_fan</p>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Finally an oracle that doesn't talk to me like a yoga instructor. Chaotic Daily Oracle gets the assignment."</p>
+      <p class="testi-name">@xo_celesteee</p>
+    </div>
+  </div>
+</section>
 
-        <section class="section seo-section" id="about">
-            <h2>What is the Chaotic Daily Oracle?</h2>
-            <p>The Chaotic Daily Oracle is a free daily oracle card reading platform designed for real women dealing with real life. Unlike traditional tarot or oracle apps that take themselves too seriously, we give you spiritual guidance that actually speaks your language — whether you're navigating a healing era, manifesting your money glow up, surviving co-parenting chaos, or just need a sign about that person you can't stop thinking about at 2am.</p>
-            <p>Every reading is crafted with intention and humor, pulling from a deck of original oracle messages across life categories like love, money, drama, healing, boss mode, and glow-up energy.</p>
-            <p>Chaotic Daily Oracle is your spiritual bestie with a sense of humor and a lot of emotional accuracy.</p>
-        </section>
+<!-- AD SPACE -->
+<div class="section" style="padding-top:0; padding-bottom:2rem;">
+  <div class="ad-banner">Advertisement — Rectangle Ad Space 300×250</div>
+</div>
 
-        <section class="section faq-section" id="faq">
-            <p class="section-label">✦ FAQ ✦</p>
-            <h2 class="section-title">Your questions, answered</h2>
-            <div class="faq-item">
-                <p class="faq-q">Are these oracle card readings accurate?</p>
-                <p class="faq-a">Think of the Chaotic Daily Oracle as your intuitive bestie who reflects back the energy you're already sitting in. The messages are designed to resonate with real situations and give you something to reflect on — not predict your future, but illuminate your present.</p>
-            </div>
-            <div class="faq-item">
-                <p class="faq-q">How often should I pull a card?</p>
-                <p class="faq-a">Pull as many as you need. Most people do one pull per situation per day for the clearest energy. Pulling multiple for the same thing can create confusion — trust your first card.</p>
-            </div>
-            <div class="faq-item">
-                <p class="faq-q">Is this different from tarot?</p>
-                <p class="faq-a">Yes! Tarot uses a structured 78-card system with deep symbolism and spreads. Oracle cards (like ours) are more free-form — less rules, more vibes. Great for quick guidance, daily check-ins, and people who are new to card reading.</p>
-            </div>
-            <div class="faq-item">
-                <p class="faq-q">Is the Chaotic Daily Oracle free?</p>
-                <p class="faq-a">Yes — completely free! We're supported by ads and our community. Pull as many cards as you want, share your readings, and if you love it, check out our site for more.</p>
-            </div>
-        </section>
+<!-- SEO CONTENT -->
+<section class="seo-section" id="about">
+  <div class="section">
+    <h2>What Is the Chaotic Daily Oracle?</h2>
+    <p>The Chaotic Daily Oracle is a free daily oracle card reading platform designed for real women dealing with real life. Unlike traditional tarot or oracle apps that take themselves a little too seriously, we give you spiritual guidance that actually speaks your language — whether you're navigating a healing era, manifesting your money glow up, surviving co-parenting chaos, or just need a sign about that person you can't stop thinking about.</p>
+    <p>Every reading is crafted with intention and humor, pulling from a deck of 44 original oracle messages across seven life categories: Love &amp; Relationships, Money &amp; Abundance, Baby Daddy Drama, Healing Era, Boss Mode, Glow Up Season, and Friendship Chaos.</p>
+    <p>Linked to <strong>Mami Mayhem</strong> — a brand built for the chaotic, creative, unapologetic woman doing it all.</p>
+  </div>
+</section>
 
-        <section class="cta-strip">
-            <h2>Get your daily reading delivered</h2>
-            <p>Subscribe for your free daily oracle drop. No spam, just good vibes and guidance.</p>
-            <div class="email-row">
-                <input type="email" placeholder="your@email.com">
-                <button>Subscribe Free</button>
-            </div>
-        </section>
-    </main>
+<!-- FAQ -->
+<section class="section" id="faq">
+  <p class="section-label">✦ FAQ ✦</p>
+  <h2 class="section-title">Your Questions, Answered</h2>
+  <p class="section-sub" style="margin-bottom:2rem;">Everything you wanted to ask but were scared to</p>
 
-    <footer>
-        <!-- Sticky footer ad placeholder -->
-        <div class="footer-ad">
-            <!-- Google AdSense: Insert AdSense code here for sticky footer ad -->
-            <p>Ad Placeholder - Sticky Footer</p>
-        </div>
-        <p>&copy; 2023 Chaotic Daily Oracle. All rights reserved.</p>
-    </footer>
+  <div id="faqList">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <p class="faq-q">Are these oracle card readings accurate?</p>
+      <p class="faq-a">Think of the Chaotic Daily Oracle as your intuitive bestie who reflects back the energy you're already sitting in. The messages are designed to resonate with real situations and give you something to reflect on — not predict your future, but illuminate your present.</p>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <p class="faq-q">How often should I pull a card?</p>
+      <p class="faq-a">Pull as many as you need, bestie. Most people do one pull per situation per day for the clearest energy. Pulling multiple for the same thing can create confusion — trust your first card.</p>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <p class="faq-q">Is this different from tarot?</p>
+      <p class="faq-a">Yes! Tarot uses a structured 78-card system with deep symbolism and spreads. Oracle cards (like ours) are more free-form — less rules, more vibes. Great for quick guidance, daily check-ins, and people who are new to card reading.</p>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <p class="faq-q">What is Mami Mayhem?</p>
+      <p class="faq-a">Mami Mayhem is the brand that Chaotic Daily Oracle calls home. It's a lifestyle brand for women who are unapologetically themselves — chaotic, spiritual, ambitious, and fun. Visit the Mami Mayhem shop for merch and more.</p>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <p class="faq-q">Is the Chaotic Daily Oracle free?</p>
+      <p class="faq-a">Yes — completely free! We're supported by ads and our amazing community. Pull as many cards as you want, share your readings, and if you love it, check out Mami Mayhem for the merch drop.</p>
+    </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<!-- CTA STRIP -->
+<section class="cta-strip">
+  <h2>Get Your Daily Reading Delivered</h2>
+  <p>Subscribe for your free daily oracle drop. No spam, just good vibes and guidance.</p>
+  <div class="email-row">
+    <input type="email" placeholder="your@email.com">
+    <button>Subscribe Free</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Chaotic Daily Oracle</p>
+  <div class="footer-links">
+    <a href="#">Home</a>
+    <a href="#">Pull a Card</a>
+    <a href="#">About</a>
+    <a href="#">FAQ</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="https://mami-mayhem.myshopify.com">Mami Mayhem Shop ✦</a>
+  </div>
+  <p>© 2025 Chaotic Daily Oracle · Part of the Mami Mayhem universe</p>
+  <p style="margin-top:0.5rem;font-size:0.7rem;opacity:0.4;">For entertainment purposes. Not a substitute for professional advice.</p>
+</footer>
+
+<script>
+const cards = {
+  love: [
+    { word: "Surrender", msg: "Stop forcing what isn't flowing. The right energy is coming — but you have to release the grip first.", affirmation: '"I release what I cannot control and trust what\'s meant for me."', color1: '#4A1528', color2: '#6B2540', text: '#F4D0D8', num: 7 },
+    { word: "Magnetism", msg: "You don't have to chase. Your energy is your magnet. Get back to yourself and watch who comes running.", affirmation: '"I am magnetic, whole, and deeply worthy of love."', color1: '#3D1020', color2: '#7A2045', text: '#F9D0DC', num: 14 },
+    { word: "Red Flag", msg: "Bestie, you already know. Stop asking the oracle what you already told your best friend three months ago.", affirmation: '"I trust my instincts. I choose people who choose me."', color1: '#3D0A0A', color2: '#7A1515', text: '#FADADA', num: 3 },
+    { word: "New Chapter", msg: "Something is ending so that something much better can begin. The grief is real — and so is what's coming.", affirmation: '"Every ending is making room for my next beginning."', color1: '#0D3040', color2: '#1A5C7A', text: '#C8E8F5', num: 22 }
+  ],
+  money: [
+    { word: "Overflow", msg: "Money is energy and your energy is shifting. A financial opportunity is closer than you think. Stay open.", affirmation: '"Abundance flows to me easily and naturally."', color1: '#2A1A00', color2: '#5C3A00', text: '#F0D9A8', num: 8 },
+    { word: "Invest", msg: "It's time to bet on yourself. The fear of spending on your growth is costing you more than you know.", affirmation: '"Investing in myself always returns tenfold."', color1: '#1A2A00', color2: '#3A5C00', text: '#D5EBA8', num: 16 },
+    { word: "Stop Waiting", msg: "The perfect time isn't coming. Launch it, price it right, and let the market tell you. Done is better than perfect.", affirmation: '"I take bold action toward my financial freedom."', color1: '#2A1500', color2: '#5C3000', text: '#EDD5A8', num: 4 }
+  ],
+  drama: [
+    { word: "Boundaries", msg: "Repeat it with me: 'That's not my problem to fix.' Your peace is not negotiable, even for the kids' dad.", affirmation: '"My peace is sacred and I protect it without apology."', color1: '#2A1500', color2: '#5C2800', text: '#F0D0B0', num: 11 },
+    { word: "Detach", msg: "His chaos is not your emergency. Respond to the kids, not the drama. Gray rock energy activated.", affirmation: '"I respond from a place of calm, not reaction."', color1: '#1A0A2A', color2: '#40205C', text: '#E0C8F0', num: 19 },
+    { word: "Document Everything", msg: "Not spiritually — literally. Keep records, stay professional, and let karma handle the rest. You already won.", affirmation: '"I protect my peace and my children with clarity and grace."', color1: '#0A1A2A', color2: '#1A3D5C', text: '#C8DFF0', num: 6 }
+  ],
+  healing: [
+    { word: "Rest", msg: "Healing isn't always doing shadow work at midnight. Sometimes it's just sleep, water, and saying no to things.", affirmation: '"Rest is productive. I honor my need to restore."', color1: '#0A2A18', color2: '#1A5C38', text: '#C8DDD4', num: 9 },
+    { word: "Inner Child", msg: "What does the little version of you need right now? Give it to yourself. You're the adult she needed.", affirmation: '"I hold my inner child with compassion and tenderness."', color1: '#1A1A3A', color2: '#35356B', text: '#D0D0F0', num: 17 },
+    { word: "Release", msg: "You can't carry what happened AND build what's coming. Put it down. Not forgiveness for them — freedom for you.", affirmation: '"I release the past and create space for my healing."', color1: '#0A2A2A', color2: '#1A5C5C', text: '#C8E0E0', num: 2 }
+  ],
+  boss: [
+    { word: "Launch It", msg: "You've been ready. You've been 'getting ready to be ready' for six months. Hit post. Launch the thing.", affirmation: '"I act boldly and trust my skills and vision."', color1: '#1A0A2A', color2: '#44206B', text: '#DBC8E2', num: 13 },
+    { word: "Raise Your Rates", msg: "You're undercharging and overdelivering and you know it. Your prices are about to go up. Non-negotiable.", affirmation: '"I charge what I\'m worth without guilt or hesitation."', color1: '#2A1500', color2: '#5C3A00', text: '#F0D9A8', num: 21 },
+    { word: "The Vision Is Right", msg: "Everyone who doubted you is going to wish they'd been supportive. Stay the course. The receipts are coming.", affirmation: '"My vision is valid and my success is inevitable."', color1: '#0A1A2A', color2: '#20406B', text: '#C8D8F0', num: 5 }
+  ],
+  clarity: [
+    { word: "Trust Yourself", msg: "You already know the answer. You've known for a while. The oracle is just confirming what your gut has been saying.", affirmation: '"My intuition is a superpower and I trust it completely."', color1: '#1A1A2A', color2: '#35355A', text: '#D0D0F0', num: 10 },
+    { word: "Wait", msg: "Not forever — but right now, the information you need hasn't arrived yet. Patience is strategy, not weakness.", affirmation: '"I trust divine timing and wait with peace."', color1: '#0A2A1A', color2: '#1A5C40', text: '#C8DDD4', num: 18 },
+    { word: "Both Are True", msg: "You can want to leave AND still love them. You can be scared AND still take the leap. Complexity is allowed.", affirmation: '"I hold nuance and make decisions with wisdom and compassion."', color1: '#2A0A1A', color2: '#5C2040', text: '#F0C8D8', num: 33 }
+  ],
+  friendship: [
+    { word: "Audit Your Circle", msg: "Who celebrates your wins without being weird about it? Keep those people. The rest are seasonal.", affirmation: '"I attract and keep people who genuinely love and celebrate me."', color1: '#2A1A0A', color2: '#5C4020', text: '#EDD8C0', num: 15 },
+    { word: "Say It", msg: "The resentment is growing because you haven't said the thing. Have the conversation. Real friendships can handle it.", affirmation: '"I communicate honestly with the people I love."', color1: '#1A0A0A', color2: '#4A1818', text: '#F0C8C8', num: 23 }
+  ],
+  glow: [
+    { word: "Main Character", msg: "This is your season. Walk like you know where you're going even when you're figuring it out. The confidence comes with the reps.", affirmation: '"I step into my era fully and unapologetically."', color1: '#0A1A2A', color2: '#1A3D6B', text: '#C8DFF0', num: 20 },
+    { word: "Glow Is Internal", msg: "The most attractive thing about you isn't the look, it's the energy. Work on the inside and the outside follows.", affirmation: '"My light comes from within and I let it shine freely."', color1: '#2A2A0A', color2: '#5C5020', text: '#EDEBB0', num: 30 }
+  ],
+  family: [
+    { word: "You Can't Fix Everyone", msg: "Your job is to show up for your kids and yourself. You are not responsible for healing your family's generational patterns alone.", affirmation: '"I release the weight of others and focus on what I can control."', color1: '#0A2A1A', color2: '#1A5C38', text: '#C8DDD4', num: 25 },
+    { word: "Protect Your Energy", msg: "Some family visits need time limits and exit plans. That's not being difficult — that's being wise.", affirmation: '"I love my family from a healthy distance when needed."', color1: '#2A1A1A', color2: '#5C3535', text: '#EDD0C8', num: 31 }
+  ]
+};
+
+let currentTopic = null;
+let isFlipped = false;
+let currentCard = null;
+
+function selectSituation(topic, label, icon) {
+  currentTopic = topic;
+  isFlipped = false;
+  const inner = document.getElementById('cardInner');
+  inner.classList.remove('flipped');
+  document.getElementById('readingDetail').classList.remove('visible');
+
+  const badge = document.getElementById('topicBadge');
+  badge.textContent = icon + ' ' + label;
+  badge.style.display = 'inline-block';
+
+  document.querySelector('.oracle-stage-title').textContent = 'Your ' + label + ' Reading';
+  document.querySelector('.oracle-stage-sub').textContent = 'Click the card to reveal your message';
+
+  document.getElementById('cardStage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  const deck = cards[topic] || cards.clarity;
+  currentCard = deck[Math.floor(Math.random() * deck.length)];
+
+  const bg = document.getElementById('cardBg');
+  bg.style.background = `linear-gradient(155deg, ${currentCard.color1}, ${currentCard.color2})`;
+  document.getElementById('cardCategory').style.color = currentCard.text;
+  document.getElementById('cardCategory').textContent = label.toUpperCase();
+  document.getElementById('cardWord').style.color = currentCard.text;
+  document.getElementById('cardWord').textContent = currentCard.word;
+  document.getElementById('cardDivider').style.background = currentCard.text;
+  document.getElementById('cardMsg').style.color = currentCard.text;
+  document.getElementById('cardMsg').textContent = currentCard.msg;
+  document.getElementById('cardNum').style.color = currentCard.text;
+  document.getElementById('cardNum').textContent = `Card #${currentCard.num} of 44`;
+}
+
+function flipCard() {
+  if (!currentTopic) {
+    alert('Choose a situation first, bestie ✨');
+    return;
+  }
+  if (isFlipped) return;
+  isFlipped = true;
+  document.getElementById('cardInner').classList.add('flipped');
+  setTimeout(() => {
+    document.getElementById('detailTitle').textContent = `"${currentCard.word}" — Your Full Reading`;
+    document.getElementById('detailText').textContent = currentCard.msg + ' This card is calling you to sit with this energy today. Notice where it shows up in your life, and what feelings it brings up.';
+    document.getElementById('detailAffirm').textContent = currentCard.affirmation;
+    document.getElementById('readingDetail').classList.add('visible');
+  }, 600);
+}
+
+function resetCard() {
+  isFlipped = false;
+  document.getElementById('cardInner').classList.remove('flipped');
+  document.getElementById('readingDetail').classList.remove('visible');
+  if (currentTopic) {
+    const deck = cards[currentTopic] || cards.clarity;
+    currentCard = deck[Math.floor(Math.random() * deck.length)];
+    const label = document.getElementById('topicBadge').textContent.slice(2);
+    const bg = document.getElementById('cardBg');
+    bg.style.background = `linear-gradient(155deg, ${currentCard.color1}, ${currentCard.color2})`;
+    document.getElementById('cardCategory').textContent = label.toUpperCase();
+    document.getElementById('cardWord').style.color = currentCard.text;
+    document.getElementById('cardWord').textContent = currentCard.word;
+    document.getElementById('cardMsg').style.color = currentCard.text;
+    document.getElementById('cardMsg').textContent = currentCard.msg;
+    document.getElementById('cardDivider').style.background = currentCard.text;
+    document.getElementById('cardNum').style.color = currentCard.text;
+    document.getElementById('cardNum').textContent = `Card #${currentCard.num} of 44`;
+    document.getElementById('cardCategory').style.color = currentCard.text;
+  }
+  document.querySelector('.oracle-stage-sub').textContent = 'Click the card to reveal your new message';
+}
+
+function toggleFaq(el) {
+  el.classList.toggle('open');
+}
+</script>
 </body>
 </html>
