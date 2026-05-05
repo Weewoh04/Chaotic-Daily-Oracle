@@ -1,0 +1,39 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+  width:1200px; height:630px; overflow:hidden;
+  background:#07040F; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  font-family: Georgia, serif;
+  position: relative;
+}
+.bg { position:absolute; inset:0; 
+  background: radial-gradient(ellipse at 30% 50%, rgba(155,127,212,0.15), transparent 60%),
+              radial-gradient(ellipse at 70% 40%, rgba(200,151,58,0.1), transparent 60%); }
+.eyebrow { font-size:18px; letter-spacing:0.25em; text-transform:uppercase;
+  color:#C8973A; margin-bottom:24px; font-family:sans-serif; font-weight:500; }
+h1 { font-size:80px; color:#E8DFC8; line-height:1.05; margin-bottom:24px; font-style:italic; }
+h1 em { color:#C4516B; font-style:italic; }
+.sub { font-size:22px; color:rgba(232,223,200,0.5); font-family:sans-serif; 
+  font-weight:300; letter-spacing:0.05em; margin-bottom:32px; }
+.tags { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+.tag { background:rgba(200,151,58,0.12); border:1px solid rgba(200,151,58,0.3);
+  color:#C8973A; padding:6px 16px; border-radius:20px; font-size:14px;
+  font-family:sans-serif; letter-spacing:0.1em; text-transform:uppercase; }
+.url { position:absolute; bottom:28px; font-size:16px; letter-spacing:0.15em;
+  color:rgba(232,223,200,0.3); font-family:sans-serif; text-transform:uppercase; }
+</style></head><body>
+<div class="bg"></div>
+<p class="eyebrow">✦ Free Daily Oracle Readings ✦</p>
+<h1>Chaotic<br><em>Daily Oracle</em></h1>
+<p class="sub">Pull a free card for love · money · healing · boss mode</p>
+<div class="tags">
+  <span class="tag">💋 Love Era</span>
+  <span class="tag">💰 Money Moves</span>
+  <span class="tag">🌿 Healing Era</span>
+  <span class="tag">👑 Boss Mode</span>
+</div>
+<p class="url">chaotic-daily-oracle.vercel.app</p>
+</body></html>
