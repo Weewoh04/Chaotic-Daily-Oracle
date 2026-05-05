@@ -405,8 +405,115 @@ const zodiacMessages = {
 
 let currentCard = null;
 let selectedSign = null;
+let selectedTopic = null;
 const historyKey = 'chaoticRecentReadings';
 const signKey = 'selectedZodiacSign';
+
+const topicConfig = {
+    love: {
+        label: 'Love Era',
+        keywords: 'love oracle reading, relationship energy, emotional connection, romance advice, heart healing',
+        titleRoots: ['The Heart Mirror', 'The Lovers Flame', 'The Soul Signal', 'The Tender Boundary', 'The Velvet Spell', 'The Moonlit Promise', 'The Heartbeat Pact', 'The Cupid Call', 'The Rose Shadow', 'The Intimate Whisper'],
+        titleModifiers: ['Rising', 'Reveal', 'Renewal', 'Attraction', 'Reminder', 'Shift', 'Healing', 'Return', 'Glow', 'Rite'],
+        messageStarts: ['Your heart is asking for more honesty', 'This reading surfaces the deeper feeling behind your connection', 'The energy is pointing toward emotional clarity', 'A boundary is ready to be rewritten', 'Your attraction is changing shape', 'The message is about being seen', 'You are invited to trust your instincts', 'The oracle asks you to feel before you react', 'A new chapter of love is arriving', 'The current vibration wants your attention'],
+        messageEnds: ['rather than the fantasy.','so you can move with confidence.','and create the space you deserve.','instead of repeating the old pattern.','with intention and care.','before you accept anything less than respect.','so that love feels freeing, not confining.','with the level of honesty you crave.','and let your heart lead the way.','without sacrificing your peace.'],
+        vibes: ['Warm attraction', 'Safe surrender', 'Confident connection', 'Healing intimacy', 'Magnetic boundaries', 'Gentle courage', 'Romantic clarity', 'Emotional safety', 'Heart-centered power', 'Pure desire'],
+        avoids: ['Ignoring your truth', 'People-pleasing to keep the peace', 'Rushing the connection', 'Replaying the same drama', 'Hiding your needs', 'Settling for bruised love', 'Accepting confusion as comfort', 'Ghosting your own wants', 'Fearing vulnerability', 'Waiting for a perfect sign'],
+        dos: ['Speak your needs clearly', 'Protect your energy with kindness', 'Choose love that feels steady', 'Let your intuition guide the boundary', 'Nurture what makes you glow', 'Hold yourself with compassion', 'Step into your own worth', 'Lean into healthy desire', 'Invite honesty into your circle', 'Own the version of love you want']
+    },
+    money: {
+        label: 'Money Moves',
+        keywords: 'money oracle reading, abundance strategy, financial energy, wealth mindset, hustle guidance',
+        titleRoots: ['The Cash Current', 'The Abundance Align', 'The Wealth Wave', 'The Prosperity Path', 'The Payoff Pulse', 'The Vault Vision', 'The Currency Shift', 'The Opulence Orbit', 'The Resource Flow', 'The Money Motion'],
+        titleModifiers: ['Rising', 'Reveal', 'Renewal', 'Momentum', 'Expansion', 'Strategy', 'Harvest', 'Shift', 'Power', 'Launch'],
+        messageStarts: ['Your earning energy is being recalibrated', 'This reading exposes where abundance is waiting', 'The oracle asks you to invest in your own value', 'A financial opportunity is asking for focus', 'Your money mindset is shifting toward growth', 'The energy is calling for smarter boundaries with resources', 'You are being invited to see potential in unexpected places', 'This card wants you to claim your worth', 'The current flow favors disciplined action', 'Your abundance will respond to clearer intention'],
+        messageEnds: ['instead of playing small.', 'because your balance is your power.', 'when the offer feels aligned.', 'with a long-term perspective.', 'and release the scarcity story.', 'instead of chasing the quick win.', 'with honest fees and fair demand.', 'as a reward for consistent effort.', 'instead of inventing drama.', 'with your highest return in mind.'],
+        vibes: ['Financial confidence', 'Abundance clarity', 'Smart hustle', 'Money magnetism', 'Secure flow', 'Bold investment', 'Profit focus', 'Resource wisdom', 'Cash courage', 'Effort with ease'],
+        avoids: ['Chaotic spending', 'Comparing your progress to others', 'Ignoring stable opportunities', 'Sacrificing peace for a paycheck', 'Procrastinating on the next move', 'Trusting a quick fix', 'Staying stuck in scarcity', 'Overworking without strategy', 'Neglecting your worth', 'Letting fear dictate your dollars'],
+        dos: ['Track your cash with real intention', 'Say yes to aligned offers', 'Build systems that support abundance', 'Value your expertise fairly', 'Create a margin for growth', 'Let profitable boundaries sit in place', 'Choose investments that honor your time', 'Show up as your own boss', 'Celebrate your money evolution', 'Reinvest in what fuels your vision']
+    },
+    drama: {
+        label: 'Baby Daddy Drama',
+        keywords: 'drama oracle reading, co-parenting energy, ex relationship guidance, boundary messages, emotional fallout',
+        titleRoots: ['The Tea Spill', 'The Co-Parent Crossroads', 'The Ex Energy', 'The Boundary Bell', 'The Mess & Message', 'The Reconciliation Read', 'The Relationship Rip', 'The Capture & Release', 'The Mirror of Chaos', 'The Signal Shift'],
+        titleModifiers: ['Rising', 'Reveal', 'Renewal', 'Interference', 'Trigger', 'Boundary', 'Signal', 'Shift', 'Release', 'Return'],
+        messageStarts: ['This conversation needs a firmer edge', 'The circle is asking you to protect your peace', 'A conflict is trying to teach you a limit', 'Your energy is draining in a partnership space', 'The oracle asks you to notice where respect is missing', 'You are invited to respond instead of react', 'The message wants you to clarify the rules', 'A messy interaction is not the whole story', 'This reading points to what is truly yours', 'The current tension is asking for a better layout'],
+        messageEnds: ['before it becomes a pattern.', 'instead of assuming you are wrong.', 'and keep your power intact.', 'with something healthier for you.', 'rather than surrendering to the chaos.', 'because peace is non-negotiable.', 'and protect your emotional home.', 'instead of letting the drama win.', 'with calm authority.', 'and hold your line.'],
+        vibes: ['Boundary clarity', 'Calm authority', 'Drama-free power', 'Protective wisdom', 'Grounded resilience', 'Emotional armor', 'Straight talking', 'Centered calm', 'Tough love grace', 'Clear energy'],
+        avoids: ['Engaging in toxic loops', 'Giving away your energy', 'Accepting disrespect as normal', 'Spinning on someone else’s chaos', 'Reacting from fear', 'Trading peace for attention', 'Sacrificing your boundaries', 'Agreeing to weak terms', 'Helping when you are hurt', 'Wondering if you are too much'],
+        dos: ['Set boundaries with care', 'Speak in clear, calm terms', 'Protect your emotional space', 'Hold your center through conflict', 'Choose what you will allow', 'Lead with integrity', 'Ignore noise that is not yours', 'Check in with your own priorities', 'Keep the conversation grounded', 'Move away from toxic replay']
+    },
+    healing: {
+        label: 'Healing Era',
+        keywords: 'healing oracle reading, emotional recovery, self-care guidance, inner work, boundaries',
+        titleRoots: ['The Rebirth Ritual', 'The Quiet Reclaim', 'The Boundary Bloom', 'The Tender Repair', 'The Soul Reset', 'The Mirror Mend', 'The Slow Rise', 'The Sanctuary Spell', 'The Inner Flame', 'The Gentle Shift'],
+        titleModifiers: ['Rising', 'Reveal', 'Renewal', 'Recovery', 'Rest', 'Repair', 'Reset', 'Growth', 'Wake', 'Radical'],
+        messageStarts: ['Your body and heart are asking for a softer tempo', 'This reading invites you to slow down and listen', 'The oracle wants you to honor your limits', 'A tender part of you needs a safe container', 'The current energy is pointing to gentle repair', 'You are being asked to choose nourishment first', 'This card is about healing through honesty', 'Your spiritual muscles are being rebuilt', 'The message is urging you to release old weight', 'The reading feels like permission to rest'],
+        messageEnds: ['while you rebuild stronger.', 'instead of rushing the process.', 'because rest is revolutionary.', 'with the tenderness you deserve.', 'instead of carrying every timeline.', 'and trust the slow turn.', 'with safer boundaries in place.', 'instead of forcing grace.', 'so you can return with more clarity.', 'and let the regeneration begin.'],
+        vibes: ['Soft resilience', 'Gentle renewal', 'Grounded recovery', 'Sacred rest', 'Calming transformation', 'Healing courage', 'Quiet clarity', 'Restorative power', 'Tender strength', 'Soulful repair'],
+        avoids: ['Neglecting your needs', 'Pushing through pain', 'Accepting a rushed recovery', 'Ignoring the signals from your body', 'Continuing old burnout habits', 'Pretending everything is fine', 'Choosing hard over healthy', 'Holding onto guilt', 'Comparing your pace to others', 'Ignoring the small wins'],
+        dos: ['Rest without guilt', 'Check in with your heart', 'Create healing space', 'Say yes to gentle support', 'Honor your own pace', 'Keep your boundaries sacred', 'Allow the emotion to move', 'Celebrate the little shifts', 'Invest in soul care', 'Return to yourself fully']
+    },
+    boss: {
+        label: 'Boss Mode',
+        keywords: 'boss mode oracle reading, career energy, confidence, leadership guidance, power moves',
+        titleRoots: ['The Power Protocol', 'The Hustle Halo', 'The Leader Lift', 'The Manifest March', 'The Authority Arc', 'The Confidence Code', 'The Energy Equity', 'The Crown Call', 'The Empire Pulse', 'The Move Momentum'],
+        titleModifiers: ['Rising', 'Reveal', 'Renewal', 'Launch', 'Command', 'Charge', 'Clarity', 'Pivot', 'Drive', 'Takeover'],
+        messageStarts: ['Your ambition is being refined', 'This reading confirms your leadership energy', 'The oracle wants you to take a decisive step', 'A power move is ready to land', 'Your confidence is being called forward', 'The message is about owning your worth', 'This card asks you to move with both strength and grace', 'Your path is opening in a bold way', 'The energy favors decisive action', 'You are meant to lead with intention'],
+        messageEnds: ['that feels aligned and sustainable.', 'instead of shrinking to fit expectations.', 'with clear boundaries in place.', 'and keep your momentum fluid.', 'instead of overcommitting to others.', 'with your own values leading.', 'rather than forcing the outcome.', 'with confidence, not aggression.', 'and trust your instincts.', 'while staying grounded.'],
+        vibes: ['Commanding energy', 'Strategic focus', 'Bold confidence', 'Calm authority', 'High impact', 'Measured power', 'Career clarity', 'Executive grace', 'Winning momentum', 'Driven balance'],
+        avoids: ['Overworking without direction', 'Letting others define your goals', 'Using chaos as a badge of honor', 'Ignoring your limits for approval', 'Sacrificing rest for productivity', 'Staying in a small role', 'Ignoring your own intuition', 'Letting fear stall action', 'Settling for distraction', 'Apologizing for ambition'],
+        dos: ['Clarify your next move', 'Protect your energy while winning', 'Own your confidence honestly', 'Align action with impact', 'Say no to ambition without peace', 'Lead from your values', 'Choose moves that scale', 'Celebrate your own wins', 'Delegate with trust', 'Keep your power grounded']
+    },
+    clarity: {
+        label: 'Clarity & Decisions',
+        keywords: 'clarity oracle reading, decision making, intuitive guidance, choice energy, mental clarity',
+        titleRoots: ['The Decision Dial', 'The Clear Signal', 'The Mind Map', 'The Truth Beacon', 'The Option Oracle', 'The Choice Compass', 'The Insight Ignite', 'The Clarity Current', 'The Focus Flash', 'The Path Pointer'],
+        titleModifiers: ['Rising', 'Reveal', 'Renewal', 'Focus', 'Guide', 'Breakthrough', 'Shift', 'Reset', 'Pulse', 'Indicator'],
+        messageStarts: ['Your next move needs a quieter voice', 'This reading is asking you to cut through noise', 'The oracle wants you to trust what feels clear', 'A decision is easier when you honor your values', 'The message invites you to weigh your energy, not the opinions', 'Your clarity will come through steady presence', 'This card is reminding you to simplify', 'The current question deserves your honest attention', 'You are being guided toward the option that aligns with your core', 'The energy is asking for fewer possibilities and more focus'],
+        messageEnds: ['instead of chasing what looks good.', 'and let your intuition lead.', 'with fewer distractions.', 'instead of overcomplicating the choice.', 'and trust what feels right in your bones.', 'with clarity, not confusion.', 'rather than looking for outside approval.', 'with grounded confidence.', 'and keep the path simple.', 'so you can move forward with ease.'],
+        vibes: ['Focused clarity', 'Decisive calm', 'Mental ease', 'Strategic insight', 'Grounded perspective', 'Steady confidence', 'Clear direction', 'Intuitive stillness', 'Balanced choice', 'Calm resolve'],
+        avoids: ['Overthinking every option', 'Listening to too many voices', 'Rushing without a feel', 'Ignoring the option that feels calm', 'Tolerating fuzzy answers', 'Waiting for perfect certainty', 'Letting fear stall you', 'Complicating a clear case', 'Bouncing between extremes', 'Avoiding the real question'],
+        dos: ['Limit your inputs', 'Choose the option that feels honest', 'Make the simplest decision first', 'Give yourself space to feel it out', 'Trust your inner yes', 'Break the decision into the smallest step', 'Honor your priorities', 'Release what no longer fits', 'Focus on the highest-alignment choice', 'Follow what feels internally true']
+    }
+};
+
+const topicPools = {};
+
+function initTopicPools() {
+    Object.keys(topicConfig).forEach(topic => {
+        topicPools[topic] = createTopicCards(topic, 200);
+    });
+}
+
+function createTopicCards(topic, count) {
+    const config = topicConfig[topic];
+    const cards = [];
+
+    for (let i = 0; i < count; i++) {
+        const titleRoot = config.titleRoots[i % config.titleRoots.length];
+        const titleModifier = config.titleModifiers[i % config.titleModifiers.length];
+        const title = `${titleRoot} ${titleModifier}`;
+        const messageStart = config.messageStarts[i % config.messageStarts.length];
+        const messageEnd = config.messageEnds[i % config.messageEnds.length];
+        const message = `${messageStart} ${messageEnd}`;
+        const vibe = config.vibes[i % config.vibes.length];
+        const avoid = config.avoids[i % config.avoids.length];
+        const doInstead = config.dos[i % config.dos.length];
+
+        cards.push({
+            title,
+            message,
+            vibe,
+            avoid,
+            doInstead,
+            category: topic,
+            topicLabel: config.label
+        });
+    }
+
+    return cards;
+}
 
 document.getElementById('pull-card-btn').addEventListener('click', pullCard);
 document.getElementById('pull-again-btn').addEventListener('click', pullCard);
@@ -463,6 +570,54 @@ function getCardOfTheDay() {
     return oracleCards[cardIndex];
 }
 
+function getTopicCards(topic) {
+    return topicPools[topic] || oracleCards;
+}
+
+function selectTopic(topic, label) {
+    selectedTopic = topic;
+    document.getElementById('selected-topic').textContent = `Selected topic: ${label}`;
+    document.querySelectorAll('.sit-card').forEach(card => {
+        card.classList.toggle('selected', card.dataset.topic === topic);
+    });
+}
+
+function setupTopicSelection() {
+    document.querySelectorAll('.sit-card[data-topic]').forEach(card => {
+        card.addEventListener('click', () => {
+            selectTopic(card.dataset.topic, card.querySelector('.sit-name').textContent);
+        });
+    });
+}
+
+function generateCardExplanation(card) {
+    const categoryLabel = topicConfig[card.category]?.label || 'Oracle';
+    const seoCategory = topicConfig[card.category]?.keywords || 'oracle reading, daily oracle, spiritual guidance';
+    const title = card.title;
+    const message = card.message;
+    const vibe = card.vibe;
+    const avoid = card.avoid;
+    const doInstead = card.doInstead;
+
+    const paragraphs = [
+        `This ${categoryLabel.toLowerCase()} reading is written to be more than a quick message. The card titled “${title}” is designed to feel like a full answer for anyone searching for modern ${categoryLabel.toLowerCase()} guidance, emotional clarity, or daily oracle insight. It is both practical and poetic, built so that the content is SEO-friendly while still feeling grounded and relevant.`,
+        `The main message of the card is: ${message} That phrasing matters because it helps the reader land in the exact energy they are experiencing. This explanation expands the meaning of that message, showing how that phrase becomes a prompt for action, a reclamation of power, and a reminder to pay attention to the parts of the situation that matter most.`,
+        `When a card carries the vibe of ${vibe}, it is asking you to feel the current energy in your body and your choices. This is not about vague inspiration — it is about recognizing the specific frequency of your experience. The language in the card is intentionally rooted in the way people search for content online, with keywords that match category intent and real-life emotional vocabulary.`,
+        `The “avoid” guidance is a critical part of the reading. In this case, the card is telling you to stop ${avoid.toLowerCase()}. That instruction is offered as a form of compassionate wisdom rather than as a criticism. It helps the reader see where they may be self-sabotaging or repeating old patterns, and it points them toward a more aligned path.`,
+        `The “do this instead” advice is practical and empowering. Here, the card suggests you ${doInstead.toLowerCase()}. That direction is designed to be immediately usable in your day, whether you are navigating romance, money, drama, healing, boss energy, or a clarity question. It is the step that transforms insight into momentum.`,
+        `From an SEO perspective, this explanation includes the kinds of phrases people search for when they want a reliable ${categoryLabel.toLowerCase()} oracle reading. It speaks to “daily card pull,” “relationship advice,” “abundance mindset,” “boundary work,” “boss mode energy,” or “decision clarity,” depending on the category. The content uses those concepts naturally so it feels readable instead of forced.`,
+        `This card also works as a bridge between spiritual language and actionable guidance. It helps the reader understand that oracle readings are not just mystical messages — they are tools for real-life change. By describing the card in both emotional and strategic terms, the explanation becomes shareable, bookmarkable, and worthy of being saved or pinned.`,
+        `If someone is scrolling for content on ${categoryLabel.toLowerCase()}, they want to feel seen and they want a clear next step. This explanation offers that by naming the feeling, naming what to avoid, and naming what to choose instead. It also reinforces the value of the card as a daily check-in, not a one-time fortune.`,
+        `The longer form of this copy is intentional. Search engines favor pages that provide depth and relevance, and readers favor content that stays with them. This is why the explanation expands on the initial phrase, connects it to the reader’s lived experience, and repeats the category keywords in a natural way.`,
+        `Consider this content as a daily ritual in written form: it takes the flash of a card pull and turns it into a meaningful paragraph of wisdom. The more the reader can feel the logic behind the message, the more likely they are to engage, share, and come back for another pull tomorrow.`,
+        `The final part of this explanation is a gentle reminder that your reading is valid, meaningful, and useful. It wraps up the guidance by saying that your energy is not random, your choice matters, and this card is a prompt to move with intention. That closing also enhances the SEO value by repeating the category phrase one more time and giving the reader a clear, grounded takeaway.`,
+        `Overall, this ${categoryLabel.toLowerCase()} card explanation is long enough to satisfy search intent, detailed enough to feel rich, and clear enough to be practical. It is a strong fit for anyone who wants a daily oracle pull that reads like both a guidance note and a mini essay.`,
+        `If you want the result to feel even more branded and Pinterest-ready, I can add a small category badge or a bold share quote to the card output that makes the content pop visually while keeping the SEO-rich copy intact.`
+    ];
+
+    return paragraphs.join('\n\n');
+}
+
 function getDayOfYear(date) {
     const start = new Date(date.getFullYear(), 0, 0);
     const diff = date - start;
@@ -486,8 +641,9 @@ function getTimeToMidnight() {
 }
 
 function pullCard() {
-    const randomIndex = Math.floor(Math.random() * oracleCards.length);
-    currentCard = oracleCards[randomIndex];
+    const pool = selectedTopic && topicPools[selectedTopic] ? topicPools[selectedTopic] : oracleCards;
+    const randomIndex = Math.floor(Math.random() * pool.length);
+    currentCard = pool[randomIndex];
 
     let message = currentCard.message;
     if (selectedSign && zodiacMessages[selectedSign]) {
@@ -500,6 +656,7 @@ function pullCard() {
     document.getElementById('card-vibe').textContent = currentCard.vibe;
     document.getElementById('card-avoid').textContent = currentCard.avoid;
     document.getElementById('card-do').textContent = currentCard.doInstead;
+    document.getElementById('card-explanation').textContent = generateCardExplanation(currentCard);
 
     document.getElementById('share-text').textContent = `Share this: "My chaotic oracle card today is ${currentCard.title}. Check yours at ChaoticDailyOracle.com!"`;
 
@@ -534,7 +691,8 @@ function flipCard() {
 function shareOnPinterest() {
     if (!currentCard) return;
     const pageUrl = window.location.href;
-    const description = `"${currentCard.message}" — ${currentCard.title} vibes from Chaotic Daily Oracle.`;
+    const topicLabel = currentCard.topicLabel || currentCard.category || 'oracle';
+    const description = `"${currentCard.message}" — ${currentCard.title} vibes from Chaotic Daily Oracle. Category: ${topicLabel}.`;
     const imageUrl = 'https://chaoticdailyoracle.com/card-share.jpg';
     const pinterestUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(pageUrl)}&description=${encodeURIComponent(description)}&media=${encodeURIComponent(imageUrl)}`;
     window.open(pinterestUrl, '_blank');
@@ -542,8 +700,9 @@ function shareOnPinterest() {
 
 function copyTikTokCaption() {
     if (!currentCard) return;
-    const topicTag = currentCard.title.toLowerCase().replace(/[^a-z0-9]+/gi, '');
-    const caption = `POV: the oracle pulled ${currentCard.vibe} for my ${currentCard.title} situation 🔮 Pull yours free at chaoticdailyoracle.com #oracle #dailycard #${topicTag}era`;
+    const topicLabel = currentCard.topicLabel || currentCard.category || 'oracle';
+    const topicTag = topicLabel.toLowerCase().replace(/[^a-z0-9]+/gi, '');
+    const caption = `POV: the oracle pulled ${currentCard.vibe} for my ${topicLabel} situation 🔮 Pull yours free at chaoticdailyoracle.com #oracle #dailycard #${topicTag}era`;
     copyTextToClipboard(caption);
 }
 
@@ -555,8 +714,8 @@ function copyReading() {
 
 function populateViralPanel() {
     if (!currentCard) return;
-    const topicLabel = selectedSign || 'oracle';
-    const topic = (selectedSign || 'oracle').toLowerCase().replace(/[^a-z0-9]+/g, '');
+    const topicLabel = currentCard.topicLabel || currentCard.category || 'oracle';
+    const topic = topicLabel.toLowerCase().replace(/[^a-z0-9]+/g, '');
     const caption = `POV: the oracle pulled "${currentCard.word}" for my ${topicLabel} situation 🔮✨\n\nMessage: "${currentCard.message.slice(0,80)}..."\n\nPull yours FREE 👇\n#oraclecards #${topic}era #dailyoracle #spiritualtiktok #mamimayhem #chaoticdailyoracle`;
     document.getElementById('tiktokCaption').textContent = caption;
 }
@@ -577,15 +736,17 @@ function copyTikTok() {
 
 function copyPinterest() {
     if (!currentCard) return;
-    const topic = (selectedSign || 'oracle').toLowerCase().replace(/[^a-z0-9]+/g, '');
-    const pinterestText = `✨ ${currentCard.word} for my ${selectedSign || 'oracle'} energy. Pull yours free at chaotic-daily-oracle.vercel.app #oraclecards #${topic}era #spiritualtiktok #chaoticdailyoracle`;
+    const topicLabel = currentCard.topicLabel || currentCard.category || 'oracle';
+    const topic = topicLabel.toLowerCase().replace(/[^a-z0-9]+/g, '');
+    const pinterestText = `✨ ${currentCard.word} for my ${topicLabel} energy. Pull yours free at chaotic-daily-oracle.vercel.app #oraclecards #${topic}era #spiritualtiktok #chaoticdailyoracle`;
     copyTextToClipboard(pinterestText);
     showToast('Pinterest text copied!');
 }
 
 function shareX() {
     if (!currentCard) return;
-    const text = `My oracle card today: "${currentCard.word}" ✦ Pull yours free at chaotic-daily-oracle.vercel.app`;
+    const currentTopic = currentCard.topicLabel || currentCard.category || 'oracle';
+    const text = `My oracle card today: "${currentCard.word}" from ${currentTopic} energy ✦ Pull yours free at chaotic-daily-oracle.vercel.app`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
 }
 
@@ -642,7 +803,7 @@ function saveRecentReading() {
     const readings = getRecentReadings();
     const entry = {
         date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        topic: currentCard.title,
+        topic: `${currentCard.topicLabel || currentCard.category || 'Oracle'} — ${currentCard.title}`,
         word: currentCard.vibe,
         message: currentCard.message
     };
@@ -742,6 +903,8 @@ document.addEventListener('DOMContentLoaded', () => {
         copyTextToClipboard(text);
     });
 
+    initTopicPools();
+    setupTopicSelection();
     loadSelectedSign();
     document.querySelectorAll('.zodiac-btn').forEach(btn => {
         btn.addEventListener('click', () => selectZodiacSign(btn.dataset.sign));

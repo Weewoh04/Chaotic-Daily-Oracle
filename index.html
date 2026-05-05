@@ -56,6 +56,7 @@
             <h1>Chaotic Daily Oracle</h1>
             <p>A daily card pull for your feelings, your spiral, and your main character era.</p>
             <button id="pull-card-btn" class="cta-button">Pull My Card</button>
+            <p id="selected-topic" style="color:rgba(232,223,200,0.8);margin-top:1rem;font-size:0.95rem;">Pick a topic to pull a matching category card.</p>
         </section>
 
         <div class="section-divider"></div>
@@ -117,6 +118,8 @@
                         <p id="card-avoid"></p>
                         <h3>Do This Instead</h3>
                         <p id="card-do"></p>
+                        <h3>Deep Reading</h3>
+                        <p id="card-explanation" style="margin-top:1rem;color:rgba(232,223,200,0.88);line-height:1.85;font-size:0.94rem;max-width:720px;text-align:left;"></p>
                     </div>
                 </div>
             </div>
@@ -182,32 +185,32 @@
             <h2 class="section-title">What do you need clarity on?</h2>
             <p class="section-sub">Tap a topic and then pull your card for real-talk guidance</p>
             <div class="situation-grid">
-                <div class="sit-card love">
+                <div class="sit-card love" data-topic="love">
                     <span class="sit-icon">💋</span>
                     <p class="sit-name">Love Era</p>
                     <p class="sit-desc">Romance, attraction, and relationship energy</p>
                 </div>
-                <div class="sit-card money">
+                <div class="sit-card money" data-topic="money">
                     <span class="sit-icon">💰</span>
                     <p class="sit-name">Money Moves</p>
                     <p class="sit-desc">Abundance, hustle, and financial instincts</p>
                 </div>
-                <div class="sit-card drama">
+                <div class="sit-card drama" data-topic="drama">
                     <span class="sit-icon">🍵</span>
                     <p class="sit-name">Baby Daddy Drama</p>
                     <p class="sit-desc">Co-parenting, ex energy, and messy texts</p>
                 </div>
-                <div class="sit-card healing">
+                <div class="sit-card healing" data-topic="healing">
                     <span class="sit-icon">🌿</span>
                     <p class="sit-name">Healing Era</p>
                     <p class="sit-desc">Self-care, boundaries, and emotional rebirth</p>
                 </div>
-                <div class="sit-card boss">
+                <div class="sit-card boss" data-topic="boss">
                     <span class="sit-icon">👑</span>
                     <p class="sit-name">Boss Mode</p>
                     <p class="sit-desc">Career, confidence, and your power moves</p>
                 </div>
-                <div class="sit-card clarity">
+                <div class="sit-card clarity" data-topic="clarity">
                     <span class="sit-icon">🔮</span>
                     <p class="sit-name">Clarity & Decisions</p>
                     <p class="sit-desc">The choice you keep replaying in your head</p>
